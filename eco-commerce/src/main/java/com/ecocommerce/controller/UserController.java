@@ -43,7 +43,7 @@ public class UserController {
 		return this.userService.saveUser(userDTO);
 	}
 	
-	@GetMapping("/login")
+	@PostMapping("/login")
 	public UserDTO login(@RequestBody UserDTO userDTO) {
 		
 		UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(
