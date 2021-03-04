@@ -15,7 +15,7 @@ Fil rouge Aston
 - PostgreSQL 12.6
 - Postman dernière version
 - DBeaver dernière version
-- Lombok (ouvrir le projet sur eclipce, ouvrir l'arborescence aller dans libreries, maven dependencies,
+- Lombok (ouvrir le projet sur eclipse, ouvrir l'arborescence aller dans librairies, maven dependencies,
   trouver lombok, click droit preferences, ouvrir l'emplacement du fichier et double click sur le jar 
   lombok pour l'installer).
     
@@ -28,44 +28,11 @@ Fil rouge Aston
 
 ### Création des utilisateurs
 
-<<<<<<< Updated upstream
-=======
 ```shell
 sudo adduser --gecos "Aeckeline Ravalomanda" --disabled-password ravalomanda
 sudo adduser --gecos "Badrane Houmadi" --disabled-password houmadi
 sudo adduser --gecos "Vincent Dubreu" --disabled-password dubreu
 ```
-
-### Génération des clés ssh pour chaque utilisateur
-```shell
-<<<<<<< Updated upstream
-sudo adduser --gecos "Aeckeline Ravalomanda" --disabled-password ravalomanda
-sudo adduser --gecos "Badrane Houmadi" --disabled-password houmadi
-sudo adduser --gecos "Vincent Dubreu" --disabled-password dubreu
-```
-=======
-ssh-keygen -t rsa -b 4096 
-```
-### Copie de la clé publique dans le répetoire .ssh de chaque utilisateur sous le nom _authorized_keys_
-```shell
-mv id_rsa.pub /home/usrname/.ssh/authorized_keys
-```
-
-### Génération des clés ssh pour chaque utilisateur
-```shell
-<<<<<<< Updated upstream
-sudo adduser --gecos "Aeckeline Ravalomanda" --disabled-password ravalomanda
-sudo adduser --gecos "Badrane Houmadi" --disabled-password houmadi
-sudo adduser --gecos "Vincent Dubreu" --disabled-password dubreu
-```
-ssh-keygen -t rsa -b 4096 
-```
-### Copie de la clé publique dans le répetoire .ssh de chaque utilisateur sous le nom _authorized_keys_
-```shell
-mv id_rsa.pub /home/usrname/.ssh/authorized_keys
-```
-
-
 
 ### Génération des clés ssh pour chaque utilisateur
 ```shell
@@ -74,21 +41,4 @@ ssh-keygen -t rsa -b 4096
 ### Copie de la clé publique dans le répetoire .ssh de chaque utilisateur sous le nom _authorized_keys_
 ```shell
 mv id_rsa.pub /home/usrname/.ssh/authorized_keys
-```
-
-### Création des utilisateurs
-
-```shell
-sudo adduser --gecos "Aeckeline Ravalomanda" --disabled-password ravalomanda
-sudo adduser --gecos "Badrane Houmadi" --disabled-password houmadi
-sudo adduser --gecos "Vincent Dubreu" --disabled-password dubreu
-```
-
-### Génération des clés ssh pour chaque utilisateur
-```shell
-ssh-keygen -t rsa -b 4096 
-```
-### Copie de la clé publique dans le répetoire .ssh de chaque utilisateur sous le nom _authorized_keys_
-```shell
-mv id_rsa.pub /home/username/.ssh/authorized_keys
 ```
