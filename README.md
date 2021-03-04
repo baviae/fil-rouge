@@ -10,7 +10,7 @@ Fil rouge Aston
 - PostgreSQL 12.6
 - Postman dernière version
 - DBeaver dernière version
-- Lombok (ouvrir le projet sur eclipce, ouvrir l'arborescence aller dans libreries, maven dependencies,
+- Lombok (ouvrir le projet sur eclipse, ouvrir l'arborescence aller dans librairies, maven dependencies,
   trouver lombok, click droit preferences, ouvrir l'emplacement du fichier et double click sur le jar 
   lombok pour l'installer).
     
@@ -19,15 +19,13 @@ Fil rouge Aston
 
 
 
-# Configutation du serveur
+# Configuration du serveur
 
 ```shell
 sudo adduser --gecos "Aeckeline Ravalomanda" --disabeld-password ravalomanda
 sudo adduser --gecos "Badrane Houmadi" --disabeld-password houmadi
 sudo adduser --gecos "Vincent Dubreu" --disabeld-password dubreu
-```
 
-Modification aeckeline
 
 
   
