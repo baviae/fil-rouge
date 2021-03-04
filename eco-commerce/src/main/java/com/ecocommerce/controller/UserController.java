@@ -32,6 +32,8 @@ public class UserController {
 	@Autowired
 	UserService userService;
 
+	@Autowired
+	private AuthenticationManager authenticationManager;
 		
 	
 	@PostMapping("/SignIn")
@@ -43,10 +45,19 @@ public class UserController {
 	
 	@GetMapping("/login")
 	public UserDTO login(@RequestBody UserDTO userDTO) {
-		String token = JwtGetToken.getJWTToken(userDTO.getUsername());
-		userDTO.setToken(token);
-		userDTO.setPassword(null);
-		return userDTO;
+		
+		UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(
+				userDTO.getEmail(), userDTO.getPassword());
+		Authentication authentication = authenticationManager.authenticate(usernamePasswordAuthenticationToken);
+
+		if (authentication != null && authentication.isAuthenticated()) {
+			String token = JwtGetToken.getJWTToken(userDTO.getEmail());
+			userDTO.setToken(token);
+			userDTO.setPassword(null);
+			return userDTO;
+		}
+
+		return null;
 		
 	}
 	

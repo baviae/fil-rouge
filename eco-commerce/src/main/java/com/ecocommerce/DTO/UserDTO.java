@@ -15,7 +15,10 @@ import lombok.Setter;
 // userDto c'est l'objet qui va être utiliser pour envoyer des donner de l'utilisateur vers le front.
 public class UserDTO {
 
-    private String username;
+	Long id;
+	private String nom;
+	private String prenom;
+    private String email;
 
     private String password;
     

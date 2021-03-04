@@ -28,20 +28,28 @@ public class UserService implements IUserService{
 	public UserDTO saveUser(UserDTO user) {
 		
 		Users users = Users.builder()
-				.username(user.getUsername())
+				.email(user.getEmail())
+				.nom(user.getNom())
+				.prenom(user.getPrenom())
 				.password(this.encoder.encode(user.getPassword()))
 				.build();
 		
 		Users users2 = this.userDao.save(users);
 		
-		return UserDTO.builder().username(users2.getUsername()).build();
+		return UserDTO.builder()
+				.email(users2.getEmail())
+				.nom(user.getNom())
+				.prenom(user.getPrenom())
+				.build();
 	}
 
 	@Override
 	public List<UserDTO> listeUsers() {
 		
 		return this.userDao.findAll().stream().map(u -> UserDTO.builder().
-				username(u.getUsername())
+				email(u.getEmail())
+				.nom(u.getNom())
+				.prenom(u.getPrenom())
 				.build()).collect(Collectors.toList());
 	}
 	

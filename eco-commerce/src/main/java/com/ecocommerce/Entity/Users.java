@@ -28,9 +28,12 @@ public class Users {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "user_seq")
     private Long id;
+	
+	private String nom;
+	private String prenom;
 
     @Column(nullable = false, unique = true)
-    private String username;
+    private String email;
 
     private String password;
     
