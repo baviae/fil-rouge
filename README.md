@@ -19,14 +19,24 @@ Fil rouge Aston
 
 
 
-# Configutation du serveur
+# Configuration du serveur
+
+### Création des utilisateurs
 
 ```shell
-sudo adduser --gecos "Aeckeline Ravalomanda" --disabeld-password ravalomanda
-sudo adduser --gecos "Badrane Houmadi" --disabeld-password houmadi
-sudo adduser --gecos "Vincent Dubreu" --disabeld-password dubreu
+sudo adduser --gecos "Aeckeline Ravalomanda" --disabled-password ravalomanda
+sudo adduser --gecos "Badrane Houmadi" --disabled-password houmadi
+sudo adduser --gecos "Vincent Dubreu" --disabled-password dubreu
 ```
-TEST_VINCENT_2
+
+### Génération des clés ssh pour chaque utilisateur
+```shell
+ssh-keygen -t rsa -b 4096 
+```
+### Copie de la clé publique dans le répetoire .ssh de chaque utilisateur sous le nom _authorized_keys_
+```shell
+mv id_rsa.pub /home/usrname/.ssh/authorized_keys
+```
 
 
 
