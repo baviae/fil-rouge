@@ -20,6 +20,9 @@ import lombok.Setter;
 @NoArgsConstructor
 @Builder
 @Entity
+
+
+// C'est la table qui va être crée en base de donnée Grace a l'annotation @Entity
 public class Users {
 	
 	@Id

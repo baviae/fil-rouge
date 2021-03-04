@@ -11,6 +11,8 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+
+// userDto c'est l'objet qui va être utiliser pour envoyer des donner de l'utilisateur vers le front.
 public class UserDTO {
 
     private String username;
