@@ -28,11 +28,27 @@ Fil rouge Aston
 
 ### Création des utilisateurs
 
-
+<<<<<<< Updated upstream
+=======
 ```shell
 sudo adduser --gecos "Aeckeline Ravalomanda" --disabled-password ravalomanda
 sudo adduser --gecos "Badrane Houmadi" --disabled-password houmadi
 sudo adduser --gecos "Vincent Dubreu" --disabled-password dubreu
+```
+
+### Génération des clés ssh pour chaque utilisateur
+```shell
+<<<<<<< Updated upstream
+sudo adduser --gecos "Aeckeline Ravalomanda" --disabled-password ravalomanda
+sudo adduser --gecos "Badrane Houmadi" --disabled-password houmadi
+sudo adduser --gecos "Vincent Dubreu" --disabled-password dubreu
+```
+=======
+ssh-keygen -t rsa -b 4096 
+```
+### Copie de la clé publique dans le répetoire .ssh de chaque utilisateur sous le nom _authorized_keys_
+```shell
+mv id_rsa.pub /home/usrname/.ssh/authorized_keys
 ```
 
 ### Génération des clés ssh pour chaque utilisateur
