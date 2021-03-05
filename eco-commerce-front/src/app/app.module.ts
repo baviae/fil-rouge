@@ -1,31 +1,28 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
+import { BrowserModule } from '@angular/platform-browser';
+import { RouterModule } from '@angular/router';
+
+import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
-import { RouterModule } from '@angular/router';
-import { AcceuilComponent } from './acceuil/acceuil.component';
 import { InscriptionComponent } from './inscription/inscription.component';
+import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
+import { TokenhandlerforhttpreqService } from './services/tokenhandlerforhttpreq.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    AcceuilComponent,
     InscriptionComponent
   ],
   imports: [
     BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
     FormsModule,
-    HttpModule,
-    RouterModule.forRoot([
-      {path: '', component: AcceuilComponent},
-      {path: 'login', component: LoginComponent},
-      {path: 'inscription', component: InscriptionComponent},
-    ]),
   ],
-  providers: [],
+  providers: [{provide: HTTP_INTERCEPTORS, useClass: TokenhandlerforhttpreqService, multi: true}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

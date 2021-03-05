@@ -8,12 +8,15 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.aspectj.weaver.PerTypeWithinTargetTypeMunger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -44,7 +47,7 @@ public class UserController {
 	}
 	
 	@PostMapping("/login")
-	public UserDTO login(@RequestBody UserDTO userDTO) {
+	public ResponseEntity<UserDTO> login(@RequestBody UserDTO userDTO) {
 		
 		UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(
 				userDTO.getEmail(), userDTO.getPassword());
@@ -54,7 +57,7 @@ public class UserController {
 			String token = JwtGetToken.getJWTToken(userDTO.getEmail());
 			userDTO.setToken(token);
 			userDTO.setPassword(null);
-			return userDTO;
+			return new ResponseEntity<UserDTO>(userDTO,HttpStatus.OK);
 		}
 
 		return null;
@@ -68,7 +71,8 @@ public class UserController {
 		request.getSession().invalidate();
 		res.sendRedirect("/login");
 	}
-	
+
+
 	@GetMapping("/utilisateurs")
 	public List<UserDTO> listeUser(){
 		return this.userService.listeUsers();

@@ -1,17 +1,18 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
-import { utilisateur } from 'app/Models/utilisateur';
+import { Observable } from 'rxjs';
+import { utilisateur } from '../Models/utilisateur';
 
-
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class LoginService {
 
   baseurl = 'http://localhost:8080';
-  constructor(private http: Http) { }
+  constructor(private http: HttpClient) { }
 
-
-  gettoken(user:utilisateur){
-    return this.http.post('/login',user);
+  gettoken(user:utilisateur):Observable<any> {
+    return this.http.post(this.baseurl +'/login',user);
   }
 
 }
