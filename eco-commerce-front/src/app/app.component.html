@@ -17,7 +17,7 @@
       <li *ngIf="logger" class="nav-item">
         <a class="nav-link" (click)='logout()'>Log Out</a>
       </li>
-      <li class="nav-item">
+      <li *ngIf="!logger" class="nav-item">
         <a class="nav-link" href="/inscription">inscription</a>
       </li>
     </ul>
@@ -25,8 +25,8 @@
   </div>
 </nav>
 
-<div>
+<!-- <div>
   <button class="btn btn-outline-success my-2 my-sm-0" (click)="show()">Search</button>
-</div>
+</div>-->
 
 <router-outlet></router-outlet>
