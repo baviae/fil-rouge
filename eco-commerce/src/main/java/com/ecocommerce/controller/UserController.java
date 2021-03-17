@@ -25,8 +25,10 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ecocommerce.DTO.UserDTO;
+import com.ecocommerce.Entity.Users;
 import com.ecocommerce.service.UserService;
 import com.ecocommerce.utile.JwtGetToken;
+import com.ecocommerce.utile.MyUserPrincipal;
 
 
 @RestController
@@ -53,8 +55,11 @@ public class UserController {
 				userDTO.getEmail(), userDTO.getPassword());
 		Authentication authentication = authenticationManager.authenticate(usernamePasswordAuthenticationToken);
 
+		MyUserPrincipal us  = (MyUserPrincipal) authentication.getPrincipal();
+		
 		if (authentication != null && authentication.isAuthenticated()) {
 			String token = JwtGetToken.getJWTToken(userDTO.getEmail());
+			userDTO.setId(us.getUser().getId());
 			userDTO.setToken(token);
 			userDTO.setPassword(null);
 			return new ResponseEntity<UserDTO>(userDTO,HttpStatus.OK);

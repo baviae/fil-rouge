@@ -14,6 +14,27 @@ public class MyUserPrincipal implements UserDetails {
     public MyUserPrincipal(Users user) {
         this.user = user;
     }
+    
+    
+
+	@Override
+	public String toString() {
+		return "MyUserPrincipal [user=" + user + "]";
+	}
+
+
+
+	public Users getUser() {
+		return user;
+	}
+
+
+
+	public void setUser(Users user) {
+		this.user = user;
+	}
+
+
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {

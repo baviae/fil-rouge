@@ -12,6 +12,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
@@ -19,7 +20,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Builder
 @Entity
-
+@ToString
 
 // C'est la table qui va être crée en base de donnée Grace a l'annotation @Entity
 public class Users {
