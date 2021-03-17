@@ -6,6 +6,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -24,6 +26,8 @@ public class Panier {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "panier_seq")
 	private Long id;
-	private List<Produit> produit;
+	@OneToMany
+	private List<Produit> produits;
+	
 
 }

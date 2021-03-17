@@ -2,16 +2,16 @@ package com.ecocommerce.IService;
 
 import java.util.List;
 
-import com.ecocommerce.Entity.Panier;
+import com.ecocommerce.DTO.PanierDTO;
 
 public interface IPanierService {
 	
-	public List<Panier> afficherListePanier();
+	public List<PanierDTO> afficherListePanier();
 	
-	public Panier getpanierBuyId();
+	public PanierDTO getpanierBuyId(Long id);
 	
-	public String SupprimerPanier();
+	public String SupprimerPanier(Long id);
 	
-	public Panier ajouterPanier();
+	public PanierDTO ajouterPanier(Long id , PanierDTO pan);
 
 }

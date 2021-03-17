@@ -2,16 +2,17 @@ package com.ecocommerce.IService;
 
 import java.util.List;
 
+import com.ecocommerce.DTO.ProduitDTO;
 import com.ecocommerce.Entity.Produit;
 
 public interface IProduitService {
 	
-	public List<Produit> afficherListeProduit();
+	public List<ProduitDTO> afficherListeProduit();
 	
-	public Produit getProduitBuyId();
+	public ProduitDTO getProduitBuyId(Long id);
 	
-	public String SupprimerProduit();
+	public String SupprimerProduit(Long id);
 	
-	public Produit ajouterProduit();
+	public ProduitDTO ajouterProduit(ProduitDTO prd);
 
 }

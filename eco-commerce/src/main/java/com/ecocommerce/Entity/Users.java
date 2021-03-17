@@ -5,8 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
-import com.ecocommerce.DTO.UserDTO;
+import javax.persistence.OneToOne;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -38,5 +37,7 @@ public class Users {
     private String password;
     
     private String token;
+    @OneToOne
+    private Panier panier;
 
 }

@@ -1,37 +1,63 @@
 package com.ecocommerce.service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ecocommerce.DAO.ProduitDao;
+import com.ecocommerce.DTO.ProduitDTO;
 import com.ecocommerce.Entity.Produit;
 import com.ecocommerce.IService.IProduitService;
+
 
 @Service
 public class ProduitService implements IProduitService{
 
+	@Autowired
+	ProduitDao produitDao;
+	
 	@Override
-	public List<Produit> afficherListeProduit() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<ProduitDTO> afficherListeProduit() {
+		return this.produitDao.findAll().stream().map(x -> ProduitDTO.builder()
+				.id(x.getId())
+				.image(x.getImage())
+				.nom(x.getNom())
+				.description(x.getDescription()).build())
+				.collect(Collectors.toList());
 	}
 
 	@Override
-	public Produit getProduitBuyId() {
-		// TODO Auto-generated method stub
-		return null;
+	public ProduitDTO getProduitBuyId(Long id) {
+		return this.produitToProduitDTO( this.produitDao.getOne(id));
 	}
 
 	@Override
-	public String SupprimerProduit() {
-		// TODO Auto-generated method stub
-		return null;
+	public String SupprimerProduit(Long id) {
+		this.produitDao.deleteById(id);
+		return "ok";
 	}
 
 	@Override
-	public Produit ajouterProduit() {
-		// TODO Auto-generated method stub
-		return null;
+	public ProduitDTO ajouterProduit(ProduitDTO prd) {
+		return this.produitToProduitDTO(this.produitDao.save(this.produitDtoToProduit(prd)));
+	}
+	
+	
+	private ProduitDTO produitToProduitDTO(Produit prd){
+		return ProduitDTO.builder()
+				.id(prd.getId())
+				.image(prd.getImage())
+				.nom(prd.getNom())
+				.description(prd.getDescription()).build();
+	}
+	
+	private Produit produitDtoToProduit(ProduitDTO prd){
+		return Produit.builder()
+				.image(prd.getImage())
+				.nom(prd.getNom())
+				.description(prd.getDescription()).build();
 	}
 
 }

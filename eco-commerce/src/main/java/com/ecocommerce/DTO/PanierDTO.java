@@ -17,6 +17,6 @@ import lombok.Setter;
 
 public class PanierDTO {
 	private Long id;
-	private List<Produit> produit;
+	private List<ProduitDTO> produits;
 
 }
