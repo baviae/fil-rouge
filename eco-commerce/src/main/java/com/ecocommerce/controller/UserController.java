@@ -2,6 +2,7 @@ package com.ecocommerce.controller;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -24,7 +25,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.ecocommerce.DTO.PanierDTO;
+import com.ecocommerce.DTO.ProduitDTO;
 import com.ecocommerce.DTO.UserDTO;
+import com.ecocommerce.Entity.Panier;
+import com.ecocommerce.Entity.Produit;
 import com.ecocommerce.Entity.Users;
 import com.ecocommerce.service.UserService;
 import com.ecocommerce.utile.JwtGetToken;
@@ -60,6 +65,11 @@ public class UserController {
 		if (authentication != null && authentication.isAuthenticated()) {
 			String token = JwtGetToken.getJWTToken(userDTO.getEmail());
 			userDTO.setId(us.getUser().getId());
+			if (us.getUser().getPanier() != null) {
+				userDTO.setPanierDto(this.panierToPanierDTO(us.getUser().getPanier()));
+			}
+			userDTO.setNom(us.getUser().getNom());
+			userDTO.setPrenom(us.getUser().getPrenom());
 			userDTO.setToken(token);
 			userDTO.setPassword(null);
 			return new ResponseEntity<UserDTO>(userDTO,HttpStatus.OK);
@@ -81,6 +91,42 @@ public class UserController {
 	@GetMapping("/utilisateurs")
 	public List<UserDTO> listeUser(){
 		return this.userService.listeUsers();
+	}
+	
+	
+	
+	
+	
+	public PanierDTO panierToPanierDTO(Panier pan) {
+		return PanierDTO.builder()
+		.id(pan.getId())
+		.produits(pan.getProduits()
+				.stream()
+				.map(x -> this.produitToProduitDTO(x)).collect(Collectors.toList())).build();
+	}
+	
+	public Panier panierDTOToPanier(PanierDTO pan) {
+		return Panier.builder()
+		.id(pan.getId())
+		.produits(pan.getProduits()
+				.stream()
+				.map(x -> this.produitDtoToProduit(x)).collect(Collectors.toList())).build();
+	}
+	
+	
+	private ProduitDTO produitToProduitDTO(Produit prd){
+		return ProduitDTO.builder()
+				.id(prd.getId())
+				.image(prd.getImage())
+				.nom(prd.getNom())
+				.description(prd.getDescription()).build();
+	}
+	
+	private Produit produitDtoToProduit(ProduitDTO prd){
+		return Produit.builder()
+				.image(prd.getImage())
+				.nom(prd.getNom())
+				.description(prd.getDescription()).build();
 	}
 
 }

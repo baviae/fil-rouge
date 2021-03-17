@@ -8,7 +8,7 @@
       <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
     </form>
   </div>
-  <p>{{mail}}</p>
+  <p *ngIf="logger">{{mail}}</p>
   <div>
     <ul class="navbar-nav mr-auto">
       <li *ngIf="!logger" class="nav-item">

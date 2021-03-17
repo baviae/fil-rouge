@@ -1,7 +1,9 @@
 import { Component, ViewChild } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, NavigationStart, ParamMap, Router, RoutesRecognized } from '@angular/router';
+import { utilisateur } from './Models/utilisateur';
 import { ConnecterService } from './services/connecter.service';
 import { ListeUserService } from './services/liste-user.service';
+import { UsersConnecteServiceService } from './services/users-connecte-service.service';
 
 @Component({
   selector: 'app-root',
@@ -10,23 +12,31 @@ import { ListeUserService } from './services/liste-user.service';
 })
 export class AppComponent {
   title = 'eco-commerce-front';
-  logger:any;
+  logger = false;
   refreshed = false;
   previousUrl: string;
   mail:any;
+  user:utilisateur;
   constructor(private listeUserService: ListeUserService,
-     public connecterService: ConnecterService, private router: Router, public activatedRoute: ActivatedRoute) {
+     public connecterService: ConnecterService, private router: Router, public activatedRoute: ActivatedRoute,
+     public usersConnecteServiceService:UsersConnecteServiceService) {
        
      }
 
   ngOnInit(): void {
-    if (localStorage.getItem('token')){
-      this.logger = true;
-     
-      this.mail = localStorage.getItem('email');
-    } else {
-      this.mail = '';
-    }
+    console.log('ici');
+    console.log(this.usersConnecteServiceService.getUser().subscribe(data => {
+      this.user = data
+      if (this.user){
+        this.logger = true;
+       
+        this.mail = this.user.email;
+      } else {
+        this.mail = '';
+        this.logger = false;
+      }
+    }));
+
     
   }
 
@@ -47,6 +57,7 @@ export class AppComponent {
     this.logger = false;
     this.mail = '';
     this.router.navigate(['/login'])
+    this.user = null;
 
   }
 

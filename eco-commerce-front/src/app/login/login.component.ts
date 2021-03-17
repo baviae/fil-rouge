@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { utilisateur } from '../Models/utilisateur';
 import { ConnecterService } from '../services/connecter.service';
 import { LoginService } from '../services/login.service';
+import { UsersConnecteServiceService } from '../services/users-connecte-service.service';
 
 @Component({
   selector: 'app-login',
@@ -12,7 +13,8 @@ import { LoginService } from '../services/login.service';
 export class LoginComponent implements OnInit {
 
   user:utilisateur;
-  constructor(private loginService: LoginService, private router:Router, private connecterService: ConnecterService) { }
+  constructor(private loginService: LoginService, private router:Router, private connecterService: ConnecterService,
+    public usersConnecteServiceService:UsersConnecteServiceService) { }
 
   ngOnInit(): void {
     this.user = new utilisateur();
@@ -21,21 +23,22 @@ export class LoginComponent implements OnInit {
   login(){
     this.loginService.gettoken(this.user).subscribe(
       data  => {
-        console.log(data.token)
+        
+        this.usersConnecteServiceService.addUser( data as utilisateur);
+        console.log(this.usersConnecteServiceService.getUser());
+        localStorage.setItem('user',data);
         localStorage.setItem('token',data.token);
         localStorage.setItem('email',data.email);
         this.connecterService.testLogged();
-     
         this.router.navigateByUrl('/');
-        
       }
     )
     
   }
 
-  ngOnDestroy() {
-    location.reload()
-  }
+  //ngOnDestroy() {
+   // location.reload()
+  //}
 
 
 }
