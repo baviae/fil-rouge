@@ -2,9 +2,11 @@ package com.ecocommerce.IService;
 
 import java.util.List;
 
+import com.ecocommerce.Entity.Panier;
+
 public interface IPanierService {
 	
-	public List<E> afficherListePanier();
+	public List<Panier> afficherListePanier();
 	
 	public Panier getpanierBuyId();
 	

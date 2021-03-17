@@ -2,14 +2,16 @@ package com.ecocommerce.IService;
 
 import java.util.List;
 
+import com.ecocommerce.Entity.Produit;
+
 public interface IProduitService {
 	
-	public List<E> afficherListeProduit();
+	public List<Produit> afficherListeProduit();
 	
-	public Panier getProduitBuyId();
+	public Produit getProduitBuyId();
 	
 	public String SupprimerProduit();
 	
-	public Panier ajouterProduit();
+	public Produit ajouterProduit();
 
 }
