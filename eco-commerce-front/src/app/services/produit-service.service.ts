@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { produit } from '../Models/produit';
 
 @Injectable({
   providedIn: 'root'
@@ -12,5 +13,9 @@ export class ProduitServiceService {
 
   getListeProduit (){
     return this.http.get(this.baseurl+'/produits');
+  }
+
+  saveProduit(produit:produit){
+    return this.http.post(this.baseurl+'/produit', produit);
   }
 }

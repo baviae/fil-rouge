@@ -10,13 +10,15 @@ import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { TokenhandlerforhttpreqService } from './services/tokenhandlerforhttpreq.service';
 import { AcceuilComponent } from './acceuil/acceuil.component';
+import { AjoutProduitComponent } from './ajout-produit/ajout-produit.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     InscriptionComponent,
-    AcceuilComponent
+    AcceuilComponent,
+    AjoutProduitComponent
   ],
   imports: [
     BrowserModule,

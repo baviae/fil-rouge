@@ -4,13 +4,15 @@ export class produit {
 	nom:string;
 	description:string;
 	image:string;
+    prix:number;
 
 
-    constructor(id?:number,nom?:string,description?:string,image?:string){
+    constructor(id?:number,nom?:string,description?:string,image?:string,prix?:number){
         this.id = id;
         this.nom = nom;
         this.description = description;
         this.image = image;
+        this.prix = prix;
     }
 
 }
