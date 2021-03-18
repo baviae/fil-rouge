@@ -27,9 +27,8 @@ export class AppComponent {
     console.log('ici');
     console.log(this.usersConnecteServiceService.getUser().subscribe(data => {
       this.user = data
-      if (this.user){
+      if (this.user.id !== undefined){
         this.logger = true;
-       
         this.mail = this.user.email;
       } else {
         this.mail = '';
@@ -42,7 +41,7 @@ export class AppComponent {
 
 
   refresh(): void {
-    window.location.reload();
+   // window.location.reload();
   }
 
   show(){

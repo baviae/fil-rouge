@@ -14,7 +14,7 @@
       <li *ngIf="!logger" class="nav-item">
         <a class="nav-link" href="/login">Login</a>
       </li>
-      <li *ngIf="logger" class="nav-item">
+      <li *ngIf="logger === true" class="nav-item">
         <a class="nav-link" (click)='logout()'>Log Out</a>
       </li>
       <li *ngIf="!logger" class="nav-item">
