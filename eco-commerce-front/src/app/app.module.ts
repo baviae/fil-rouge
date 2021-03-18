@@ -9,12 +9,14 @@ import { InscriptionComponent } from './inscription/inscription.component';
 import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { TokenhandlerforhttpreqService } from './services/tokenhandlerforhttpreq.service';
+import { AcceuilComponent } from './acceuil/acceuil.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    InscriptionComponent
+    InscriptionComponent,
+    AcceuilComponent
   ],
   imports: [
     BrowserModule,

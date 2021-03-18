@@ -24,6 +24,7 @@ public class ProduitService implements IProduitService{
 				.id(x.getId())
 				.image(x.getImage())
 				.nom(x.getNom())
+				.prix(x.getPrix())
 				.description(x.getDescription()).build())
 				.collect(Collectors.toList());
 	}
@@ -50,6 +51,7 @@ public class ProduitService implements IProduitService{
 				.id(prd.getId())
 				.image(prd.getImage())
 				.nom(prd.getNom())
+				.prix(prd.getPrix())
 				.description(prd.getDescription()).build();
 	}
 	
@@ -57,6 +59,7 @@ public class ProduitService implements IProduitService{
 		return Produit.builder()
 				.image(prd.getImage())
 				.nom(prd.getNom())
+				.prix(prd.getPrix())
 				.description(prd.getDescription()).build();
 	}
 

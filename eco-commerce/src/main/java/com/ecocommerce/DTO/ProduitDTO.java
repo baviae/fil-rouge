@@ -18,5 +18,6 @@ public class ProduitDTO {
 	private String nom;
 	private String description;
 	private String image;
+	private Double prix;
 
 }

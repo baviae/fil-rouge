@@ -119,6 +119,7 @@ public class UserController {
 				.id(prd.getId())
 				.image(prd.getImage())
 				.nom(prd.getNom())
+				.prix(prd.getPrix())
 				.description(prd.getDescription()).build();
 	}
 	
@@ -126,6 +127,7 @@ public class UserController {
 		return Produit.builder()
 				.image(prd.getImage())
 				.nom(prd.getNom())
+				.prix(prd.getPrix())
 				.description(prd.getDescription()).build();
 	}
 

@@ -1,42 +1,29 @@
 <div class="divLogin">
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="">Home</a>
-
-  <div class="collapse navbar-collapse d-flex justify-content-between" id="navbarSupportedContent">
-    <div>
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form>
-  </div>
-  <p *ngIf="logger">{{mail}}</p>
-  <div>
-    <ul class="navbar-nav mr-auto">
-      <li *ngIf="!logger" class="nav-item">
-        <a class="nav-link" href="/login">Login</a>
-      </li>
-      <li *ngIf="logger === true" class="nav-item">
-        <a class="nav-link" (click)='logout()'>Log Out</a>
-      </li>
-      <li *ngIf="!logger" class="nav-item">
-        <a class="nav-link" href="/inscription">inscription</a>
-      </li>
-    </ul>
-  </div>
-  </div>
-</nav>
-
-<div *ngIf="produitsList" class="container d-flex mx-auto row mt-5">
-  <div *ngFor="let prd of produitsList" class="card mr-5 mb-5" style="width: 18rem;">
-    <img class="card-img-top" src=".../100px180/" alt="Card image cap">
-    <div class="card-body">
-      <h5 class="card-title">{{prd.nom}}</h5>
-      <p class="card-text">{{prd.description}}</p>
-      <p class="card-text"></p>
-      <a href="#" class="btn btn-primary">Go somewhere</a>
-    </div>
-  </div>
-</div>
-
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="">Home</a>
+      
+        <div class="collapse navbar-collapse d-flex justify-content-between" id="navbarSupportedContent">
+          <div>
+          <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+          </form>
+        </div>
+        <p *ngIf="logger">{{mail}}</p>
+        <div>
+          <ul class="navbar-nav mr-auto">
+            <li *ngIf="!logger" class="nav-item">
+              <a class="nav-link" href="/login">Login</a>
+            </li>
+            <li *ngIf="logger === true" class="nav-item">
+              <a class="nav-link" (click)='logout()'>Log Out</a>
+            </li>
+            <li *ngIf="!logger" class="nav-item">
+              <a class="nav-link" href="/inscription">inscription</a>
+            </li>
+          </ul>
+        </div>
+        </div>
+      </nav>
 <router-outlet></router-outlet>
 </div>
