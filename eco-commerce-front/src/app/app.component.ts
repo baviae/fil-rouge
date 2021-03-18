@@ -1,8 +1,10 @@
 import { Component, ViewChild } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, NavigationStart, ParamMap, Router, RoutesRecognized } from '@angular/router';
+import { produit } from './Models/produit';
 import { utilisateur } from './Models/utilisateur';
 import { ConnecterService } from './services/connecter.service';
 import { ListeUserService } from './services/liste-user.service';
+import { ProduitServiceService } from './services/produit-service.service';
 import { UsersConnecteServiceService } from './services/users-connecte-service.service';
 
 @Component({
@@ -17,31 +19,33 @@ export class AppComponent {
   previousUrl: string;
   mail:any;
   user:utilisateur;
+  produitsList:produit[];
   constructor(private listeUserService: ListeUserService,
      public connecterService: ConnecterService, private router: Router, public activatedRoute: ActivatedRoute,
-     public usersConnecteServiceService:UsersConnecteServiceService) {
+     public usersConnecteServiceService:UsersConnecteServiceService, private produiserv: ProduitServiceService) {
        
      }
 
   ngOnInit(): void {
-    console.log('ici');
-    console.log(this.usersConnecteServiceService.getUser().subscribe(data => {
+    this.produiserv.getListeProduit().subscribe( data => {
+      this.produitsList = data as produit[];
+      console.log(this.produitsList);
+    })
+    console.log();
+    this.usersConnecteServiceService.getUser().subscribe(data => {
       this.user = data
-      if (this.user.id !== undefined){
+      if (this.user.id !== undefined || localStorage.getItem('token')){
         this.logger = true;
-        this.mail = this.user.email;
+        if (this.user.id !== undefined) {
+          this.mail = this.user.email;
+        }else {
+          this.mail = localStorage.getItem('email');
+        }
       } else {
         this.mail = '';
         this.logger = false;
       }
-    }));
-
-    
-  }
-
-
-  refresh(): void {
-   // window.location.reload();
+    }); 
   }
 
   show(){

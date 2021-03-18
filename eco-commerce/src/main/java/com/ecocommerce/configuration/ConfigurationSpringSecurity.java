@@ -51,7 +51,7 @@ public class ConfigurationSpringSecurity extends WebSecurityConfigurerAdapter im
 		   http.csrf().disable()
 		   .addFilterAfter(new JWTAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class)
 		   .authorizeRequests()
-		   .antMatchers("/SignIn","/login","/connecter").permitAll()
+		   .antMatchers("/SignIn","/login","/connecter","/produits","/produit").permitAll()
 	          .anyRequest()
 	          .authenticated();
 		   http.cors();

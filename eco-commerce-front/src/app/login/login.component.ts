@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit {
       data  => {
         
         this.usersConnecteServiceService.addUser( data as utilisateur);
-        console.log(this.usersConnecteServiceService.getUser());
+        console.log(data as utilisateur);
         localStorage.setItem('user',data);
         localStorage.setItem('token',data.token);
         localStorage.setItem('email',data.email);
