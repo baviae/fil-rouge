@@ -1,12 +1,20 @@
 package com.ecocommerce.controller;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -36,15 +44,21 @@ public class ProduitController {
 	}
 	
 	@PostMapping("produits/image")
-	public String getImageProduit(@RequestBody ProduitDTO dto) {
+	public ResponseEntity<InputStreamResource> getImageProduit(@RequestBody ProduitDTO dto) {
 
 			try {
-				return  Files.readAllBytes(Paths.get("src/main/resources/static/image/" + dto.getId() + "."+ dto.getImage().split("\\.")[1])).toString();
+				File theCsv = new File("src/main/resources/static/image/" + dto.getId() + "."+ dto.getImage().split("\\.")[1]);
+				HttpHeaders respHeaders = new HttpHeaders();
+	            MediaType mediaType = new MediaType("image",dto.getImage().split("\\.")[1]);
+	            respHeaders.setContentType(mediaType);
+	            respHeaders.setContentDispositionFormData("attachment", dto.getId() + "."+ dto.getImage().split("\\.")[1]);
+	            InputStreamResource isr = new InputStreamResource(new FileInputStream(theCsv));
+	            return new ResponseEntity<InputStreamResource>(isr, respHeaders, HttpStatus.OK);
 				
 			} catch (IOException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
-				return "";
+				return null;
 			}
 		
 		

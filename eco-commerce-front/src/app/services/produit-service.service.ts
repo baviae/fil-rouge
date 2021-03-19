@@ -31,6 +31,6 @@ export class ProduitServiceService {
   }
 
   getImagePrd(prd:produit){
-    return this.http.post(this.baseurl+'/produits/image',prd);
+    return this.http.post(this.baseurl+'/produits/image',prd,{responseType: 'text'});
   }
 }

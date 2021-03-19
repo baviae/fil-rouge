@@ -1,3 +1,4 @@
+import { Byte } from '@angular/compiler/src/util';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { produit } from '../Models/produit';
@@ -20,6 +21,7 @@ export class AcceuilComponent implements OnInit {
   previousUrl: string;
   mail:any;
   user:utilisateur;
+  image:Byte[];
   produitsList:produit[];
   constructor(private listeUserService: ListeUserService,
      public connecterService: ConnecterService, private router: Router, public activatedRoute: ActivatedRoute,
@@ -33,7 +35,11 @@ export class AcceuilComponent implements OnInit {
         this.produitsList.forEach(element => {
           if(element.image){
           this.produiserv.getImagePrd(element).subscribe(
-            data2 =>console.log(data2)
+            data2 => {
+              console.log("rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr");
+              console.log(data2);
+              console.log("rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr");
+            }
           );
           }
         });
