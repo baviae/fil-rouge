@@ -14,11 +14,10 @@
         <div class="form-group">
           <div>
             <label>Image</label>
-            <button (filePick)="_onFilesChanged($event)" ngxFilePicker>Browse</button>
-            <button type="button" (click)="testfile()"> ok</button>
+            <input #file type="file" accept='image/*' (change)="_onFilesChanged(file.files)">
           </div>
           <div class="mr-auto">
-            <img *ngIf="files" [src]="files.content" class="imgProd">
+            <img *ngIf="files" [src]="imgURL" class="imgProd">
           </div>
         </div>
         <button class="btn btn-primary" (click)="save()">Submit</button>

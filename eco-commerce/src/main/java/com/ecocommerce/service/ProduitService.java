@@ -28,6 +28,8 @@ public class ProduitService implements IProduitService{
 				.description(x.getDescription()).build())
 				.collect(Collectors.toList());
 	}
+	
+	
 
 	@Override
 	public ProduitDTO getProduitBuyId(Long id) {
@@ -43,6 +45,13 @@ public class ProduitService implements IProduitService{
 	@Override
 	public ProduitDTO ajouterProduit(ProduitDTO prd) {
 		return this.produitToProduitDTO(this.produitDao.save(this.produitDtoToProduit(prd)));
+	}
+	
+	
+
+	@Override
+	public ProduitDTO updateprd(ProduitDTO prd) {
+		return this.produitToProduitDTO(this.produitDao.save(this.updateProduitDtoToProduit(prd)));
 	}
 	
 	
@@ -62,5 +71,17 @@ public class ProduitService implements IProduitService{
 				.prix(prd.getPrix())
 				.description(prd.getDescription()).build();
 	}
+	
+	private Produit updateProduitDtoToProduit(ProduitDTO prd){
+		return Produit.builder()
+				.id(prd.getId())
+				.image(prd.getImage())
+				.nom(prd.getNom())
+				.prix(prd.getPrix())
+				.description(prd.getDescription()).build();
+	}
+
+
+
 
 }

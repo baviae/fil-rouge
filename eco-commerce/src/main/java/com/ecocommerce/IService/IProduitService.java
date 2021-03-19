@@ -14,5 +14,7 @@ public interface IProduitService {
 	public String SupprimerProduit(Long id);
 	
 	public ProduitDTO ajouterProduit(ProduitDTO prd);
+	
+	public ProduitDTO updateprd(ProduitDTO prd);
 
 }

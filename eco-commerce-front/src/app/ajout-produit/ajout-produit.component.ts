@@ -11,8 +11,10 @@ import { ProduitServiceService } from '../services/produit-service.service';
 export class AjoutProduitComponent implements OnInit {
 
   isAjouter = false;
-  files: any;
+  files: File;
   produit:produit;
+  imagePath;
+  imgURL: any;
   constructor(private produitServ:ProduitServiceService, private router:Router) { }
 
   ngOnInit(): void {
@@ -23,6 +25,7 @@ export class AjoutProduitComponent implements OnInit {
     this.produitServ.saveProduit(this.produit).subscribe(
       data => {
           this.isAjouter = true;
+          this.sendImgProduit((data as produit).id);
       }
     );
     this.produit = new produit();
@@ -33,13 +36,26 @@ export class AjoutProduitComponent implements OnInit {
   }
 
     // tslint:disable-next-line:typedef
-    _onFilesChanged($event) {
-      console.log($event);
-      this.files = $event;
+    _onFilesChanged(event) {
+      console.log(event[0]);
+      this.files = event[0];
+      var reader = new FileReader();
+      this.imagePath = event;
+      reader.readAsDataURL(event[0]); 
+      reader.onload = (_event) => { 
+        this.imgURL = reader.result; 
+      }
     }
   
     // tslint:disable-next-line:typedef
     testfile(){
       console.log(this.files);
+    }
+
+    sendImgProduit(id:number){
+      if(this.files){
+        console.log(this.files)
+        this.produitServ.pushFileToStorage(id,this.files).subscribe();
+      }
     }
 }

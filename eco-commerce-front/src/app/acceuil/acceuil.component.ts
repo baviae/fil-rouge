@@ -30,6 +30,13 @@ export class AcceuilComponent implements OnInit {
      ngOnInit(): void {
       this.produiserv.getListeProduit().subscribe( data => {
         this.produitsList = data as produit[];
+        this.produitsList.forEach(element => {
+          if(element.image){
+          this.produiserv.getImagePrd(element).subscribe(
+            data2 =>console.log(data2)
+          );
+          }
+        });
         console.log(this.produitsList);
       })
     }
