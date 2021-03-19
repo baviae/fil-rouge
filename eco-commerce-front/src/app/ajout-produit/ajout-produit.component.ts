@@ -11,6 +11,7 @@ import { ProduitServiceService } from '../services/produit-service.service';
 export class AjoutProduitComponent implements OnInit {
 
   isAjouter = false;
+  files: any;
   produit:produit;
   constructor(private produitServ:ProduitServiceService, private router:Router) { }
 
@@ -30,4 +31,15 @@ export class AjoutProduitComponent implements OnInit {
   onFocus(){
     this.isAjouter = false;
   }
+
+    // tslint:disable-next-line:typedef
+    _onFilesChanged($event) {
+      console.log($event);
+      this.files = $event;
+    }
+  
+    // tslint:disable-next-line:typedef
+    testfile(){
+      console.log(this.files);
+    }
 }

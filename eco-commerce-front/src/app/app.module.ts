@@ -11,6 +11,7 @@ import { FormsModule } from '@angular/forms';
 import { TokenhandlerforhttpreqService } from './services/tokenhandlerforhttpreq.service';
 import { AcceuilComponent } from './acceuil/acceuil.component';
 import { AjoutProduitComponent } from './ajout-produit/ajout-produit.component';
+import { NgxFileHelpersModule } from 'ngx-file-helpers';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { AjoutProduitComponent } from './ajout-produit/ajout-produit.component';
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
+    NgxFileHelpersModule,
   ],
   providers: [{provide: HTTP_INTERCEPTORS, useClass: TokenhandlerforhttpreqService, multi: true}],
   bootstrap: [AppComponent]

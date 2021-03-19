@@ -61,7 +61,6 @@ export class AppComponent {
     this.mail = '';
     this.router.navigate(['/login'])
     this.user = null;
-
   }
 
 
