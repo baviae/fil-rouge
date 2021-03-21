@@ -1,1 +1,4 @@
-<p>Votre panier est encore vide</p>
+<p>Liste des articles dans votre panier</p>
+<ul>
+<li *ngFor="let prd of panierUtilisateur.produits">{{ prd.description }}</li>
+</ul>
