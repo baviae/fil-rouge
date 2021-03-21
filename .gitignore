@@ -157,3 +157,5 @@ dmypy.json
 *.swp
 *.~
 .directory
+
+eco-commerce/src/main/resources/static/
