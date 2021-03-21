@@ -1,6 +1,7 @@
 import { Byte } from '@angular/compiler/src/util';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { imageProduit } from '../Models/imageProduit';
 import { produit } from '../Models/produit';
 import { utilisateur } from '../Models/utilisateur';
 import { ConnecterService } from '../services/connecter.service';
@@ -34,11 +35,14 @@ export class AcceuilComponent implements OnInit {
         this.produitsList = data as produit[];
         this.produitsList.forEach(element => {
           if(element.image){
-          this.produiserv.getImagePrd(element).subscribe(
+          this.produiserv.getImagePrd(element.id+'', element.image).subscribe(
             data2 => {
-              console.log("rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr");
-              console.log(data2);
-              console.log("rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr");
+              const reader = new FileReader();
+              reader.readAsDataURL(data2 as Blob);
+              reader.onload = (_event) => {
+                element.imagePrd = new imageProduit();
+                element.imagePrd.imagePatch = reader.result;
+              }
             }
           );
           }

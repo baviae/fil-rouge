@@ -30,7 +30,7 @@ export class ProduitServiceService {
     return this.http.request(newRequest);
   }
 
-  getImagePrd(prd:produit){
-    return this.http.post(this.baseurl+'/produits/image',prd,{responseType: 'text'});
+  getImagePrd(idProd:string, nomimg:string){
+    return this.http.get(this.baseurl+'/produits/image/'+idProd+'/'+nomimg, { responseType: 'blob' });
   }
 }

@@ -6,6 +6,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,17 +44,12 @@ public class ProduitController {
 		return this.produitService.ajouterProduit(dto);
 	}
 	
-	@PostMapping("produits/image")
-	public ResponseEntity<InputStreamResource> getImageProduit(@RequestBody ProduitDTO dto) {
+	@GetMapping(value = "produits/image/{idPrd}/{type}", produces = MediaType.IMAGE_JPEG_VALUE)
+	public ResponseEntity<byte[]> getImageProduit(@PathVariable("idPrd") String idPrd,@PathVariable("type") String type) {
 
 			try {
-				File theCsv = new File("src/main/resources/static/image/" + dto.getId() + "."+ dto.getImage().split("\\.")[1]);
-				HttpHeaders respHeaders = new HttpHeaders();
-	            MediaType mediaType = new MediaType("image",dto.getImage().split("\\.")[1]);
-	            respHeaders.setContentType(mediaType);
-	            respHeaders.setContentDispositionFormData("attachment", dto.getId() + "."+ dto.getImage().split("\\.")[1]);
-	            InputStreamResource isr = new InputStreamResource(new FileInputStream(theCsv));
-	            return new ResponseEntity<InputStreamResource>(isr, respHeaders, HttpStatus.OK);
+				Path filez = Paths.get("src/main/resources/static/image/" + idPrd + "."+ type.split("\\.")[1]);
+	            return ResponseEntity.ok().contentType(MediaType.IMAGE_PNG).body(Files.readAllBytes(filez));
 				
 			} catch (IOException e1) {
 				// TODO Auto-generated catch block
@@ -67,15 +63,15 @@ public class ProduitController {
 	@PostMapping("image/{id}")
 	public String handleFileUpload(@PathVariable("id") String produitId,@RequestParam("file") MultipartFile file) throws IOException {
 		ProduitDTO prdDto = this.produitService.getProduitBuyId(Long.parseLong(produitId));
-		if (file.getOriginalFilename().equals("jpg")) {
-			prdDto.setImage("jpeg");
+		if (file.getOriginalFilename().contains("jpg")) {
+			prdDto.setImage(file.getOriginalFilename().split("\\.")[0] +"."+"jpeg");
 		}else {
 			prdDto.setImage(file.getOriginalFilename());
 		}
 		
 		this.produitService.updateprd(prdDto);
 		System.out.println(file.getOriginalFilename());
-		File filez = new File("src/main/resources/static/image/"+produitId+"."+file.getContentType().split("/")[1]);
+		File filez = new File("src/main/resources/static/image/"+produitId+"."+prdDto.getImage().split("\\.")[1]);
 	      try (FileOutputStream fosFor = new FileOutputStream(filez)) {
 	      fosFor.write(file.getBytes());
 	    }

@@ -1,3 +1,5 @@
+import { imageProduit } from "./imageProduit";
+
 export class produit {
 
     id:number;
@@ -5,6 +7,7 @@ export class produit {
 	description:string;
 	image:string;
     prix:number;
+    imagePrd:imageProduit;
 
 
     constructor(id?:number,nom?:string,description?:string,image?:string,prix?:number){
