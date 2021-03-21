@@ -10,6 +10,7 @@ import { TokenhandlerforhttpreqService } from './services/tokenhandlerforhttpreq
 import { AcceuilComponent } from './acceuil/acceuil.component';
 import { AjoutProduitComponent } from './ajout-produit/ajout-produit.component';
 import { NgxFileHelpersModule } from 'ngx-file-helpers';
+import { PanierComponent } from './panier/panier.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { NgxFileHelpersModule } from 'ngx-file-helpers';
     LoginComponent,
     InscriptionComponent,
     AcceuilComponent,
-    AjoutProduitComponent
+    AjoutProduitComponent,
+    PanierComponent
   ],
   imports: [
     BrowserModule,
