@@ -2,13 +2,17 @@ package com.ecocommerce.service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.ecocommerce.DAO.IPanierDao;
 import com.ecocommerce.DAO.UserDao;
 import com.ecocommerce.DTO.PanierDTO;
 import com.ecocommerce.DTO.ProduitDTO;
+import com.ecocommerce.DTO.UserDTO;
 import com.ecocommerce.Entity.Panier;
 import com.ecocommerce.Entity.Produit;
 import com.ecocommerce.Entity.Users;
@@ -21,6 +25,9 @@ public class PanierService implements IPanierService{
 	@Autowired
 	UserDao userDao;
 	
+	@Autowired
+	IPanierDao panierDao;
+	
 
 	@Override
 	public List<PanierDTO> afficherListePanier() {
@@ -31,7 +38,7 @@ public class PanierService implements IPanierService{
 	public PanierDTO getpanierBuyId(Long id) {
 		Optional<Users> users = this.userDao.findById(id);
 		if (users.isPresent()) {
-			return this.PanierToPanierDTO(users.get().getPanier());
+			return this.panierToPanierDTO(users.get().getPanier());
 		} else {
 			return null;
 		}
@@ -39,8 +46,14 @@ public class PanierService implements IPanierService{
 
 	@Override
 	public String SupprimerPanier(Long id) {
-		
-		return null;
+		Optional<Panier> opPan = this.panierDao.findById(id);
+		if (opPan.isPresent()) {
+			opPan.get().getProduits().clear();
+			this.panierDao.save(opPan.get());
+			return "ok";
+		}else {
+			return null;
+		}
 	}
 
 	@Override
@@ -49,16 +62,27 @@ public class PanierService implements IPanierService{
 		if (users.isPresent()) {
 			users.get().setPanier(this.panierDTOToPanier(pan));
 			this.userDao.save(users.get());
-			return this.PanierToPanierDTO(this.userDao.save(users.get()).getPanier());
+			return this.panierToPanierDTO(this.userDao.save(users.get()).getPanier());
 		} else {
 			return null;
 		}
 	}
 	
 	
-	private PanierDTO PanierToPanierDTO(Panier pan) {
-		return null;
+	
+	@Override
+	public String SupprimerUnProduitDuPanier(Long panId, Long prdId) {
+		Optional<Panier> opPan = this.panierDao.findById(panId);
+		if (opPan.isPresent()) {
+			opPan.get().setProduits(opPan.get().getProduits().stream().filter(x -> x.getId() != prdId).collect(Collectors.toList()));
+			this.panierDao.save(opPan.get());
+			return "ok";
+		} else {
+			return null;
+		}
+		
 	}
+	
 	
 	public PanierDTO panierToPanierDTO(Panier pan) {
 		return PanierDTO.builder()
@@ -93,5 +117,7 @@ public class PanierService implements IPanierService{
 				.prix(prd.getPrix())
 				.description(prd.getDescription()).build();
 	}
+
+
 
 }

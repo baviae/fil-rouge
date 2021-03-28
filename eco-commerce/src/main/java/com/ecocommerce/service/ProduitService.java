@@ -66,6 +66,7 @@ public class ProduitService implements IProduitService{
 	
 	private Produit produitDtoToProduit(ProduitDTO prd){
 		return Produit.builder()
+				.id(prd.getId())
 				.image(prd.getImage())
 				.nom(prd.getNom())
 				.prix(prd.getPrix())
