@@ -33,6 +33,7 @@ public class PanierService implements IPanierService{
 	public List<PanierDTO> afficherListePanier() {
 		return null;
 	}
+	
 
 	@Override
 	public PanierDTO getpanierBuyId(Long id) {
@@ -60,7 +61,10 @@ public class PanierService implements IPanierService{
 	public PanierDTO ajouterPanier(Long id, PanierDTO pan) {
 		Optional<Users> users = this.userDao.findById(id);
 		if (users.isPresent()) {
-			users.get().setPanier(this.panierDTOToPanier(pan));
+			Optional<Panier> panierToSave = this.panierDao.findById(pan.getId());
+			panierToSave.get().setProduits(this.panierDTOToPanier(pan).getProduits());
+			Panier panier = this.panierDao.save(panierToSave.get());
+			users.get().setPanier(panier);
 			this.userDao.save(users.get());
 			return this.panierToPanierDTO(this.userDao.save(users.get()).getPanier());
 		} else {
@@ -74,7 +78,11 @@ public class PanierService implements IPanierService{
 	public String SupprimerUnProduitDuPanier(Long panId, Long prdId) {
 		Optional<Panier> opPan = this.panierDao.findById(panId);
 		if (opPan.isPresent()) {
-			opPan.get().setProduits(opPan.get().getProduits().stream().filter(x -> x.getId() != prdId).collect(Collectors.toList()));
+			for (Produit prd : opPan.get().getProduits()) {
+				if (prd .getId().equals(prdId)) {
+					opPan.get().getProduits().remove(prd);
+				}
+			}
 			this.panierDao.save(opPan.get());
 			return "ok";
 		} else {
@@ -85,11 +93,18 @@ public class PanierService implements IPanierService{
 	
 	
 	public PanierDTO panierToPanierDTO(Panier pan) {
-		return PanierDTO.builder()
-		.id(pan.getId())
-		.produits(pan.getProduits()
-				.stream()
-				.map(x -> this.produitToProduitDTO(x)).collect(Collectors.toList())).build();
+		if (pan.getProduits() != null) {
+			return PanierDTO.builder()
+					.id(pan.getId())
+					.produits(pan.getProduits()
+							.stream()
+							.map(x -> this.produitToProduitDTO(x)).collect(Collectors.toList())).build();
+		} else {
+			return PanierDTO.builder()
+					.id(pan.getId())
+					.build();
+		}
+
 	}
 	
 	public Panier panierDTOToPanier(PanierDTO pan) {
@@ -112,6 +127,7 @@ public class PanierService implements IPanierService{
 	
 	private Produit produitDtoToProduit(ProduitDTO prd){
 		return Produit.builder()
+				.id(prd.getId())
 				.image(prd.getImage())
 				.nom(prd.getNom())
 				.prix(prd.getPrix())

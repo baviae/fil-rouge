@@ -37,7 +37,6 @@ public class ConfigurationSpringSecurity extends WebSecurityConfigurerAdapter im
 	   @Autowired
 	    public void configure(AuthenticationManagerBuilder auth) 
 	      throws Exception {
-		   System.out.println("okkkkkkkk");
 	        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
 	    }
 

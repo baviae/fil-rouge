@@ -8,8 +8,6 @@ public class EcoCommerceApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(EcoCommerceApplication.class, args);
-		
-		System.out.println("hello");
 	}
 
 }

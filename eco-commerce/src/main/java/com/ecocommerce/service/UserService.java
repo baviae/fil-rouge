@@ -7,6 +7,8 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import com.ecocommerce.DAO.IPanierDao;
 import com.ecocommerce.DAO.UserDao;
 import com.ecocommerce.DTO.UserDTO;
 import com.ecocommerce.Entity.Panier;
@@ -21,6 +23,9 @@ public class UserService implements IUserService{
 	UserDao userDao;
 	
 	@Autowired
+	IPanierDao panierDao;
+	
+	@Autowired
 	PasswordEncoder encoder;
 	
 	@Autowired
@@ -28,13 +33,14 @@ public class UserService implements IUserService{
 	
 	@Override
 	public UserDTO saveUser(UserDTO user) {
+	
 		
 		Users users = Users.builder()
 				.email(user.getEmail())
 				.nom(user.getNom())
 				.prenom(user.getPrenom())
 				.password(this.encoder.encode(user.getPassword()))
-				.panier(new Panier())
+				.panier(this.panierDao.save(new Panier()))
 				.build();
 		
 		Users users2 = this.userDao.save(users);

@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import com.ecocommerce.DTO.PanierDTO;
-import com.ecocommerce.DTO.UserDTO;
 import com.ecocommerce.IService.IPanierService;
 import com.ecocommerce.IService.IProduitService;
 import com.ecocommerce.IService.IUserService;
@@ -30,18 +29,15 @@ public class PanierController {
 	IUserService userService;
 	
 	
-	
-	@GetMapping("panier/{id}")
-	public ResponseEntity<PanierDTO> getPanierUser(@PathVariable("id") Long userId){
+	@GetMapping("panier/{userId}")
+	public ResponseEntity<PanierDTO> getPanierUser(@PathVariable("userId") Long userId){
 		return new ResponseEntity<PanierDTO>( this.userService.getUserByHisId(userId).getPanierDto(),HttpStatus.OK);
 	}
 	
 	
-	@PostMapping("panier/{id}")
-	public ResponseEntity<PanierDTO> ajoutdansPanier(@PathVariable("id") Long userId, @RequestBody PanierDTO panierDto){
-		UserDTO userDto = this.userService.getUserByHisId(userId);
-		return new ResponseEntity<PanierDTO>(this.panierService.ajouterPanier(userDto.getPanierDto().getId(), panierDto),HttpStatus.OK);
-		
+	@PostMapping("panier/{userId}")
+	public ResponseEntity<PanierDTO> ajoutdansPanier(@PathVariable("userId") Long userId, @RequestBody PanierDTO panierDto){
+		return new ResponseEntity<PanierDTO>(this.panierService.ajouterPanier(userId, panierDto),HttpStatus.OK);
 	}
 	
 	
@@ -50,7 +46,7 @@ public class PanierController {
 		return this.panierService.SupprimerUnProduitDuPanier(panId, prdId);
 	}
 	
-	@DeleteMapping("panier/{panId}/{prdId}")
+	@DeleteMapping("viderpanier/{panId}")
 	public String viderPanier(@PathVariable("panId") Long panId) {
 		return this.panierService.SupprimerPanier(panId);
 	}

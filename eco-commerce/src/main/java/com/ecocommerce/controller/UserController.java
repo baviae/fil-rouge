@@ -48,8 +48,6 @@ public class UserController {
 	
 	@PostMapping("/SignIn")
 	public UserDTO inscription(@RequestBody UserDTO userDTO) {
-		System.out.println("okpppppppp");
-		System.out.println(userDTO);
 		return this.userService.saveUser(userDTO);
 	}
 	
