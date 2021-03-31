@@ -1,6 +1,6 @@
 ---
 - name: use a dedicated Ansible module
-  hosts: centos_remote_a
+  hosts: all
   become: yes
   roles:
     - { role: role.docker }
