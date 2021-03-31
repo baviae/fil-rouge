@@ -1,6 +1,6 @@
 ---
 - name: use a dedicated Ansible module
   hosts: all
-  become: yes
+  become: true
   roles:
     - { role: role.docker }
