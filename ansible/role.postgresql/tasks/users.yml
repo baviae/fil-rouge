@@ -1,0 +1,18 @@
+---
+- name: Ensure Postgresql users are present
+  postgresql_user:
+    name: "{{ item.name }}"
+    password: "{{ item.password | default(omit) }}"
+    encrypted: "{{ item.encrypted | default(omit) }}"
+    priv: "{{ item.priv | default(omit) }}"
+    role_attr_flags: "{{ item.role_attr_flags | default(omit) }}"
+    db: "{{ item.db | default(omit) }}"
+    login_host: "{{ item.login_host | default(omit) }}"
+    login_password: "{{ item.login_password | default(omit) }}"
+    login_user: "{{item.login_user | default(omit) }}"
+    port: "{{item.port | default(omit) }}"
+    state: "{{ item.state | default(omit) }}"
+  with_items: "{{ postgresql_users }}"
+  #no_log: "{{ postgresql__users_no_log }}"
+  become: true
+  become_user: "{{ postgresql_user}}"

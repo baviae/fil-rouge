@@ -1,0 +1,7 @@
+---
+# Variables configuration
+- name: Include OS-specific variables (Ubuntu)
+  include_vars: "{{ ansible_distribution }}-{{ ansible_distribution_version.split('.')[0] }}.yml"
+  when: ansible_distribution == "Ubuntu"
+
+# Mettre les differentes versions d'OS
