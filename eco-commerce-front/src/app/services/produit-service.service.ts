@@ -16,6 +16,10 @@ export class ProduitServiceService {
     return this.http.get(this.baseurl+'/produits');
   }
 
+  getProduit (id: number) : Observable<any>{
+    return this.http.get(this.baseurl+'/produit/' + id);
+  }
+
   saveProduit(produit:produit){
     return this.http.post(this.baseurl+'/produit', produit);
   }
