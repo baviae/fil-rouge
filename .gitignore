@@ -16,6 +16,7 @@
 # Gradle:
 .idea/**/gradle.xml
 .idea/**/libraries
+.idea/
 
 __pycache__/
 *.py[cod]
