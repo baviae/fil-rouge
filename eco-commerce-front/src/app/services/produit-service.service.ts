@@ -8,7 +8,7 @@ import { produit } from '../Models/produit';
 })
 export class ProduitServiceService {
 
-  baseurl = 'http://localhost:8080';
+  baseurl = 'http://192.168.1.3:8080';
   constructor(private http: HttpClient) { }
 
 
