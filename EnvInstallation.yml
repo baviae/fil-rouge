@@ -14,23 +14,26 @@
     - name: installation postgres
       command: sudo docker pull postgres
 
+    - name: install maven
+      command: sudo apt install maven -y
+
     - name : create Data Base and user name passeword And run container
       command: sudo docker run --name postgreDB -p 5432:5432 -e POSTGRES_PASSWORD=1234  -e POSTGRES_USER=baviae -e POSTGRES_DB=ecoCom -d postgres
 
-    - name: go to app back
-      command: cd eco-commerce
+    - name: install java 11
+      command: sudo apt install openjdk-11-jre-headless
+
+    - name: build jar de l'apply
+      command: mvn -f ./eco-commerce clean install
 
     - name: build l'image de l'apply java
-      command: sudo docker build . -t java-application
+      command: sudo docker build ./eco-commerce -t java-application
 
     - name: Lancement du container de l'apply java
       command: sudo docker run --network "host" -p 8080:8080 -d java-application
 
-    - name: go to app front
-      command: cd ../eco-commerce-front
-
     - name: build l'image de l'apply angular
-      command: sudo docker build . -t app-front
+      command: sudo docker build ./eco-commerce-front -t app-front
 
     - name: Lancement du container de l'apply
       command: sudo docker run -p 4200:4200 --name app-fronts --network "host" -d --rm app-front
