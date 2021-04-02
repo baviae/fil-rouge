@@ -18,7 +18,7 @@
       command: sudo docker run --name postgreDB -p 5432:5432 -e POSTGRES_PASSWORD=1234  -e POSTGRES_USER=baviae -e POSTGRES_DB=ecoCom -d postgres
 
     - name: go to app back
-      command: cd ./eco-commerce
+      command: cd eco-commerce
 
     - name: build l'image de l'apply java
       command: sudo docker build . -t java-application
