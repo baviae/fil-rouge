@@ -18,13 +18,13 @@
       command: sudo docker run --name postgreDB -p 5432:5432 -e POSTGRES_PASSWORD=1234  -e POSTGRES_USER=baviae -e POSTGRES_DB=ecoCom -d postgres
 
     - name: build l'image de l'apply java
-      command: sudo docker build . -t java-application
+      command: sudo docker build ./eco-commerce -t java-application
 
     - name: Lancement du container de l'apply java
       command: sudo docker run --network "host" -p 8080:8080 -d java-application
 
     - name: build l'image de l'apply angular
-      command: sudo docker build . -t app-front
+      command: sudo docker build ./eco-commerce-front -t app-front
 
     - name: Lancement du container de l'apply
       command: sudo docker run -p 4200:4200 --name app-fronts --network "host" -d --rm app-front

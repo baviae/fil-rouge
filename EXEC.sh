@@ -21,8 +21,8 @@ pip3 install ansible
 ansible --version
 
 # run playbook installation de docker
-ansible-playbook -i inventory ./ansible/playbook.yml
+ansible-playbook -i inventory ./ansible/playbook.yml --vault-password-file ./vault.txt
 
 # run ansible playbook install Environnement et déploiement des applications
-ansible-playbook -i inventory EnvInstallation.yml
+ansible-playbook -i inventory EnvInstallation.yml --vault-password-file ./vault.txt
 
