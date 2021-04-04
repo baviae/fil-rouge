@@ -45,19 +45,9 @@ public class ProduitController {
 	}
 	
 	@GetMapping(value = "produits/image/{idPrd}/{type}", produces = MediaType.IMAGE_JPEG_VALUE)
-	public ResponseEntity<byte[]> getImageProduit(@PathVariable("idPrd") String idPrd,@PathVariable("type") String type) {
-
-			try {
+	public ResponseEntity<byte[]> getImageProduit(@PathVariable("idPrd") String idPrd,@PathVariable("type") String type) throws IOException {
 				Path filez = Paths.get("src/main/resources/static/image/" + idPrd + "."+ type.split("\\.")[1]);
 	            return ResponseEntity.ok().contentType(MediaType.IMAGE_PNG).body(Files.readAllBytes(filez));
-				
-			} catch (IOException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-				return null;
-			}
-		
-		
 	}
 	
 	@PostMapping("image/{id}")
