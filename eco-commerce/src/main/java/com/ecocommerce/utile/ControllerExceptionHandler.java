@@ -13,7 +13,7 @@ public class ControllerExceptionHandler {
 	
 	  @ExceptionHandler(Exception.class)
 	  public void resourceNotFoundException(Exception ex) {
-			logger.error("[ "+ex.toString()+" ]" +ex.getCause() +" : " + ex.getMessage());
+			logger.error("[ "+ex.toString()+" ], cause : => " +ex.getCause() +" : " + ex.getMessage());
 	  }
 
 }
