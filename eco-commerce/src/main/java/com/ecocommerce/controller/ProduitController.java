@@ -9,6 +9,9 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.HttpEntity;
@@ -31,11 +34,14 @@ import com.ecocommerce.IService.IProduitService;
 @RestController
 public class ProduitController {
 	
+	private static Logger logger = LoggerFactory.getLogger(ProduitController.class);
+	
 	@Autowired
 	IProduitService produitService;
 	
 	@GetMapping("produits")
 	public List<ProduitDTO> produisList(){
+		logger.warn("get all produit");
 		return this.produitService.afficherListeProduit();
 	}
 	
@@ -46,8 +52,8 @@ public class ProduitController {
 	
 	@GetMapping(value = "produits/image/{idPrd}/{type}", produces = MediaType.IMAGE_JPEG_VALUE)
 	public ResponseEntity<byte[]> getImageProduit(@PathVariable("idPrd") String idPrd,@PathVariable("type") String type) throws IOException {
-				Path filez = Paths.get("src/main/resources/static/image/" + idPrd + "."+ type.split("\\.")[1]);
-	            return ResponseEntity.ok().contentType(MediaType.IMAGE_PNG).body(Files.readAllBytes(filez));
+		Path filez = Paths.get("src/main/resources/static/image/" + idPrd + "."+ type.split("\\.")[1]);
+	    return ResponseEntity.ok().contentType(MediaType.IMAGE_PNG).body(Files.readAllBytes(filez));
 	}
 	
 	@PostMapping("image/{id}")
