@@ -12,7 +12,7 @@ public class ControllerExceptionHandler {
 	private static Logger logger = LoggerFactory.getLogger(ControllerExceptionHandler.class);
 	
 	  @ExceptionHandler(Exception.class)
-	  public void resourceNotFoundException(Exception ex) {
+	  public void resourceException(Exception ex) {
 			logger.error("[ "+ex.toString()+" ], cause : => " +ex.getCause() +" : " + ex.getMessage());
 	  }
 
