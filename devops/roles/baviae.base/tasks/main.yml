@@ -1,0 +1,106 @@
+---
+
+- name: Ajout utilisateur
+  user:
+    name: "{{ item.name }}"
+    comment: "{{ item.comment }}"
+    create_home: yes
+    expires: -1
+    append: yes
+    groups: sudo
+    generate_ssh_key: yes
+    ssh_key_bits: 4096
+    ssh_key_type: rsa
+    password: "{{ item.password }}"
+    update_password: always
+  with_items:
+    - "{{ users }}"  
+
+- name: apt update et apt upgrade
+  apt:
+    update_cache: yes
+    upgrade: 'yes'
+
+- name: Preparation compilation Python
+  package:
+    name:
+      - build-essential
+      - libreadline-dev
+      - libsqlite3-dev
+      - libssl-dev 
+      - libffi-dev
+      - libgdm-dev
+      - zlib1g-dev
+      - lzma-dev
+      - libbz2-dev
+      - uuid-dev
+    state: latest
+
+- name: Test presence dernieres sources Python
+  stat: 
+    path: "{{ python_download_destination }}/Python-{{ python_version }}.tgz"
+  register: python_file_details
+
+- name: Telechargement dernière version Python
+  get_url:
+    url: https://www.python.org/ftp/python/{{ python_version }}/Python-{{ python_version }}.tgz
+    dest: "{{ python_download_destination }}"
+    mode: '0444'
+  when: python_file_details.stat.exists == false
+
+- name: Decompressin de Python-{{ python_version }}.tgz
+  unarchive:
+    src: "{{ python_download_destination }}/Python-{{ python_version }}.tgz"
+    dest: "{{ python_download_destination }}"
+  when: python_file_details.stat.exists == false
+
+- name: Test presence version de Python {{ python_version[0:3] }}
+  stat: 
+    path: /usr/local/bin/python{{ python_version[0:3] }}
+  register: python_install_ok
+
+- name: ./configure Python-{{ python_version }}
+  shell: 
+    chdir: "{{ python_download_destination }}/Python-{{ python_version }}"
+    cmd: "./configure --enable-optimizations --enable-shared"
+  when: python_install_ok.stat.exists == false
+
+- name: compilation Python-{{ python_version }}
+  shell: 
+    chdir: "{{ python_download_destination }}/Python-{{ python_version }}"
+    cmd: "make -j`nproc`"
+  when: python_install_ok.stat.exists == false
+
+- name: installation Python-{{ python_version }}
+  shell:
+    chdir: "{{ python_download_destination }}/Python-{{ python_version }}"
+    cmd: "make install"
+  when: python_install_ok.stat.exists == false
+
+- name: Suppression lien symbolique python
+  file:
+    path: /usr/bin/python
+    state: absent
+  when: python_install_ok.stat.exists == false
+
+- name: Update lien symbolique python
+  file:
+    path: /usr/bin/python
+    src: /usr/local/bin/python{{ python_version[0:3] }}
+    state: link
+  when: python_install_ok.stat.exists == false
+
+- name: Update linker
+  shell:
+    cmd: "ldconfig /usr/local/lib"
+  when: python_install_ok.stat.exists == false
+
+- name: Installation de git 
+  package:
+    name: git
+    state: latest
+
+- name: Installation derniere version Ansible via pip 
+  pip:
+    name: ansible 
+    
