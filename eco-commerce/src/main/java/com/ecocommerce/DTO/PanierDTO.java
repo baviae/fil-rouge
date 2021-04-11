@@ -18,5 +18,4 @@ import lombok.ToString;
 public class PanierDTO {
 	private Long id;
 	private List<ProduitDTO> produits;
-
 }
