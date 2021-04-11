@@ -1,8 +1,6 @@
 package com.ecocommerce.DTO;
 
 import java.util.List;
-import com.ecocommerce.Entity.Produit;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
