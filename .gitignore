@@ -161,6 +161,9 @@ dmypy.json
 
 eco-commerce/src/main/resources/static/
 
+eco-commerce/bin/
+
+
 # IDEs and editors
 .project
 .settings/
