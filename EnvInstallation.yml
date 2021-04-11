@@ -18,7 +18,7 @@
       command: sudo apt install maven -y
 
     - name : create Data Base and user name passeword And run container
-      command: sudo docker run --name postgreDB -p 5432:5432 -e POSTGRES_PASSWORD=1234  -e POSTGRES_USER=baviae -e POSTGRES_DB=ecoCom -d postgres
+      command: sudo docker run --name postgreDB -p 5432:5432 -e POSTGRES_PASSWORD=1234  -e POSTGRES_USER=baviae -e POSTGRES_DB=ecocom -d postgres
 
     - name: install java 11
       command: sudo apt install openjdk-11-jre-headless

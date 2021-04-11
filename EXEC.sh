@@ -14,10 +14,7 @@ sudo apt install -y python3
 sudo apt install python3-pip -y
 
 # install ansible last version
-pip3 install natsort
-pip3 install wheel
-pip3 install --upgrade pip
-pip3 install ansible
+sudo apt install ansible
 ansible --version
 
 # run playbook installation de docker
