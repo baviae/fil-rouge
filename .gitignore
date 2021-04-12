@@ -16,6 +16,7 @@
 # Gradle:
 .idea/**/gradle.xml
 .idea/**/libraries
+.idea/
 
 __pycache__/
 *.py[cod]
@@ -159,6 +160,9 @@ dmypy.json
 .directory
 
 eco-commerce/src/main/resources/static/
+
+eco-commerce/bin/
+
 
 # IDEs and editors
 .project

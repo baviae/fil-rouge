@@ -1,4 +1,5 @@
-<div *ngIf="produitsList" class="container d-flex mx-auto row mt-5 pt-5 rounded bg-info">
+<p class="d-flex justify-content-center mt-5">NOS PRODUITS</p>
+<div *ngIf="produitsList" class="container d-flex mx-auto row mt-2 pt-5 rounded bg-couleur">
     <div *ngFor="let prd of produitsList" class="card mr-5 mb-5" style="width: 18rem;">
       <div class="row mx-0 justify-content-center alig-item-center"> 
         <img *ngIf="prd.imagePrd != null" class="card-img-top imageResize my-auto" [src]="prd.imagePrd.imagePatch" alt="Card image cap">
