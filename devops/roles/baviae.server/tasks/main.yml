@@ -1,2 +1,34 @@
 ---
-# tasks file for baviae.server
+- name: Installation from repo Ubuntu
+  apt:
+    name: 
+      - python3-docker
+      - maven
+    state: present
+
+- name: SDK python pour docker
+  pip:
+    name: docker
+
+- name: pull postgres
+  docker_image:
+    name: postgres
+    source: pull
+    state: present
+
+- name: install db postgres dans docker
+  community.docker.docker_container:
+    name: postgresDB
+    image: postgres
+    env:
+      POSTGRES_PASSWORD: "1234"
+      POSTGRES_USER: baviae
+      POSTGRES_DB: ecocom
+    ports:
+      - "1456:5432"
+    state: started
+
+
+
+
+
