@@ -21,8 +21,8 @@
     name: postgresDB
     image: postgres
     env:
-      POSTGRES_PASSWORD: "1234"
-      POSTGRES_USER: baviae
+      POSTGRES_PASSWORD: ""
+      POSTGRES_USER: baba
       POSTGRES_DB: ecocom
     ports:
       - "1456:5432"
