@@ -25,8 +25,8 @@ public class StoreLogs {
 	private static Logger logger = LoggerFactory.getLogger(StoreLogs.class);
 	
 	private static final String storageConnectionString = "DefaultEndpointsProtocol=https;"
-			+ "AccountName=logappecocombad;"
-			+ "AccountKey=Tv+OUqtw+DCQDiGvB6e5omgwvabl9MRNRPtLP+uWSWHijE3/p9s10VlPGqod928ZArn7vNX5IT/ydsy9DHSecA==;"
+			+ "AccountName=ziuefzeuifhzuiefhz;"
+			+ "AccountKey=uefhzeufhsdjsdsldjds;"
 			+ "EndpointSuffix=core.windows.net";
 
 	public StoreLogs() {
