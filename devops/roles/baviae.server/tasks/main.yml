@@ -25,7 +25,7 @@
       POSTGRES_USER: baba
       POSTGRES_DB: ecocom
     ports:
-      - "1456:5432"
+      - "1556:5432"
     state: started
 
 
