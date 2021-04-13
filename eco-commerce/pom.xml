@@ -63,11 +63,11 @@
 			<optional>true</optional>
 		</dependency>
 		
-			    <dependency>
-		<groupId>com.microsoft.azure</groupId>
-		<artifactId>azure-storage</artifactId>
-		<version>8.4.0</version>
-	</dependency>
+		<dependency>
+			<groupId>com.microsoft.azure</groupId>
+			<artifactId>azure-storage</artifactId>
+			<version>8.4.0</version>
+		</dependency>
 		
 		<dependency>
 		    <groupId>com.azure</groupId>
@@ -92,10 +92,16 @@
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
 		</dependency>
-				<dependency>
+		<dependency>
 			<groupId>io.jsonwebtoken</groupId>
 			<artifactId>jjwt</artifactId>
 			<version>0.9.1</version>
+		</dependency>
+		
+		<dependency>
+		    <groupId>org.encryptor4j</groupId>
+		    <artifactId>encryptor4j</artifactId>
+		    <version>0.1.1</version>
 		</dependency>
 	</dependencies>
 
