@@ -25,8 +25,8 @@ public class StoreLogs {
 	private static Logger logger = LoggerFactory.getLogger(StoreLogs.class);
 	
 	private static final String storageConnectionString = "DefaultEndpointsProtocol=https;"
-			+ "AccountName=ziuefzeuifhzuiefhz;"
-			+ "AccountKey=uefhzeufhsdjsdsldjds;"
+			+ "AccountName=zssdcsdcsdcsd;"
+			+ "AccountKey=efesfcsdcsdc"
 			+ "EndpointSuffix=core.windows.net";
 
 	public StoreLogs() {
@@ -60,56 +60,58 @@ public class StoreLogs {
 		CloudBlobClient blobClient = null;
 		CloudBlobContainer container=null;
 
-		
-		try {   
-			FileUtils.writeByteArrayToFile(sourceFile, CrypteFile.encrypt(sourceFile, "pass"));
-			
-			// Parse the connection string and create a blob client to interact with Blob storage
-			storageAccount = CloudStorageAccount.parse(storageConnectionString);
-			blobClient = storageAccount.createCloudBlobClient();
-			container = blobClient.getContainerReference("logappcontainer");
-
-			// Create the container if it does not exist with public access.
-			logger.info("Creating container: " + container.getName());
-			container.createIfNotExists(BlobContainerPublicAccessType.CONTAINER, new BlobRequestOptions(), new OperationContext());		    
-
-			//Creating a sample file
-			//sourceFile = new File("logFile."+dateFormat.format(date)+".0.log");
-			
-
-			//Getting a blob reference
-			CloudBlockBlob blob = container.getBlockBlobReference(sourceFile.getName());
-
-			//Creating blob and uploading file to it
-			logger.info("Uploading the sample file ");
-			blob.uploadFromFile(sourceFile.getAbsolutePath());
-
-			//Listing contents of container
-			for (ListBlobItem blobItem : container.listBlobs()) {
-				logger.info("URI of blob is: " + blobItem.getUri());
-			}
-
-		// Download blob. In most cases, you would have to retrieve the reference
-		// to cloudBlockBlob here. However, we created that reference earlier, and 
-		// haven't changed the blob we're interested in, so we can reuse it. 
-		// Here we are creating a new file to download to. Alternatively you can also pass in the path as a string into downloadToFile method: blob.downloadToFile("/path/to/new/file").
-		downloadedFile = new File("data/", sourceFile.getName());
-		blob.downloadToFile(downloadedFile.getAbsolutePath());
-		FileUtils.writeByteArrayToFile(downloadedFile, CrypteFile.decrypt(downloadedFile, "pass"));
-		} 
-		catch (StorageException ex)
-		{
-			logger.info(String.format("Error returned from the service. Http code: %d and error code: %s", ex.getHttpStatusCode(), ex.getErrorCode()));
-		}
-		catch (Exception ex) 
-		{
-			logger.info(ex.getMessage());
-		}
-		finally 
-		{
-			sourceFile.delete();
-			logger.info("The program has completed successfully.");
-		}
-	}
+		if (sourceFile != null) {
+			try {   
+				FileUtils.writeByteArrayToFile(sourceFile, CrypteFile.encrypt(sourceFile, "pass"));
+				
+				// Parse the connection string and create a blob client to interact with Blob storage
+				storageAccount = CloudStorageAccount.parse(storageConnectionString);
+				blobClient = storageAccount.createCloudBlobClient();
+				container = blobClient.getContainerReference("logappcontainer");
 	
+				// Create the container if it does not exist with public access.
+				logger.info("Creating container: " + container.getName());
+				container.createIfNotExists(BlobContainerPublicAccessType.CONTAINER, new BlobRequestOptions(), new OperationContext());		    
+	
+				//Creating a sample file
+				//sourceFile = new File("logFile."+dateFormat.format(date)+".0.log");
+				
+	
+				//Getting a blob reference
+				CloudBlockBlob blob = container.getBlockBlobReference(sourceFile.getName());
+	
+				//Creating blob and uploading file to it
+				logger.info("Uploading the sample file ");
+				blob.uploadFromFile(sourceFile.getAbsolutePath());
+	
+				//Listing contents of container
+				for (ListBlobItem blobItem : container.listBlobs()) {
+					logger.info("URI of blob is: " + blobItem.getUri());
+				}
+	
+			// Download blob. In most cases, you would have to retrieve the reference
+			// to cloudBlockBlob here. However, we created that reference earlier, and 
+			// haven't changed the blob we're interested in, so we can reuse it. 
+			// Here we are creating a new file to download to. Alternatively you can also pass in the path as a string into downloadToFile method: blob.downloadToFile("/path/to/new/file").
+			downloadedFile = new File("data/", sourceFile.getName());
+			blob.downloadToFile(downloadedFile.getAbsolutePath());
+			FileUtils.writeByteArrayToFile(downloadedFile, CrypteFile.decrypt(downloadedFile, "pass"));
+			} 
+			catch (StorageException ex)
+			{
+				logger.info(String.format("Error returned from the service. Http code: %d and error code: %s", ex.getHttpStatusCode(), ex.getErrorCode()));
+			}
+			catch (Exception ex) 
+			{
+				logger.info(ex.getMessage());
+			}
+			finally 
+			{
+				sourceFile.delete();
+				logger.info("The program has completed successfully.");
+			}
+		} else {
+			logger.info("The program has completed but nothing sended cause of : No log file to send");
+		}
+    }
 }
