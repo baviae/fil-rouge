@@ -18,7 +18,16 @@ export class PanierComponent implements OnInit {
 
   ngOnInit(): void {
 	//TODO appeler panierService avec l'id de l'utilisateur connecté
+	this.panierService.getPanierUtilisateur(localStorage.getItem('id') as any).subscribe(
+		data => {
+			console.log(data)
+			this.panierUtilisateur = data;
+			}
+	);
 
   }
 
+  supprimer(idPrd:number){
+	this.panierService.supprimerProduit(idPrd,this.panierUtilisateur.id);
+}
 }

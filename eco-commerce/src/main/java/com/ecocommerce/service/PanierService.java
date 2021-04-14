@@ -1,5 +1,6 @@
 package com.ecocommerce.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collector;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ecocommerce.DAO.IPanierDao;
+import com.ecocommerce.DAO.ProduitDao;
 import com.ecocommerce.DAO.UserDao;
 import com.ecocommerce.DTO.PanierDTO;
 import com.ecocommerce.DTO.ProduitDTO;
@@ -28,6 +30,9 @@ public class PanierService implements IPanierService{
 	@Autowired
 	IPanierDao panierDao;
 	
+	@Autowired
+	ProduitDao produitDao;
+	
 
 	@Override
 	public List<PanierDTO> afficherListePanier() {
@@ -36,8 +41,9 @@ public class PanierService implements IPanierService{
 	
 
 	@Override
-	public PanierDTO getpanierBuyId(Long id) {
-		Optional<Users> users = this.userDao.findById(id);
+	public PanierDTO getpanierByUserId(Long userId) {
+		Optional<Users> users = this.userDao.findById(userId);
+		System.out.println(users.get());
 		if (users.isPresent()) {
 			return this.panierToPanierDTO(users.get().getPanier());
 		} else {
@@ -58,18 +64,21 @@ public class PanierService implements IPanierService{
 	}
 
 	@Override
-	public PanierDTO ajouterPanier(Long id, PanierDTO pan) {
-		Optional<Users> users = this.userDao.findById(id);
-		if (users.isPresent()) {
-			Optional<Panier> panierToSave = this.panierDao.findById(pan.getId());
-			panierToSave.get().setProduits(this.panierDTOToPanier(pan).getProduits());
-			Panier panier = this.panierDao.save(panierToSave.get());
-			users.get().setPanier(panier);
-			this.userDao.save(users.get());
-			return this.panierToPanierDTO(this.userDao.save(users.get()).getPanier());
-		} else {
-			return null;
+	public PanierDTO ajouterPanier(Long idUser, Long idPrd) {
+		Optional<Users> user = this.userDao.findById(idUser);
+		if (user.isEmpty()) return null;
+		Panier panierUtilisateur = user.get().getPanier();
+		if(panierUtilisateur == null) {
+			panierUtilisateur = new Panier();
 		}
+		if(panierUtilisateur.getProduits() == null) {
+			panierUtilisateur.setProduits(new ArrayList<Produit>());
+		}
+		Optional<Produit> produit = produitDao.findById(idPrd);
+		if(produit.isEmpty()) return null;
+		panierUtilisateur.getProduits().add(produit.get());
+		panierDao.save(panierUtilisateur);
+		return panierToPanierDTO(panierUtilisateur);
 	}
 	
 	

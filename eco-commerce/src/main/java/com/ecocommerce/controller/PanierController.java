@@ -31,13 +31,15 @@ public class PanierController {
 	
 	@GetMapping("panier/{userId}")
 	public ResponseEntity<PanierDTO> getPanierUser(@PathVariable("userId") Long userId){
-		return new ResponseEntity<PanierDTO>( this.userService.getUserByHisId(userId).getPanierDto(),HttpStatus.OK);
+		//System.out.println(this.panierService.getpanierByUserId(userId));
+		System.out.println("hello3");
+		return new ResponseEntity<PanierDTO>( this.panierService.getpanierByUserId(userId),HttpStatus.OK);
 	}
 	
 	
-	@PostMapping("panier/{userId}")
-	public ResponseEntity<PanierDTO> ajoutdansPanier(@PathVariable("userId") Long userId, @RequestBody PanierDTO panierDto){
-		return new ResponseEntity<PanierDTO>(this.panierService.ajouterPanier(userId, panierDto),HttpStatus.OK);
+	@PostMapping("panier/{userId}/{idPrd}")
+	public ResponseEntity<PanierDTO> ajoutdansPanier(@PathVariable("userId") Long userId, @PathVariable ("idPrd") Long idPrd ){
+		return new ResponseEntity<PanierDTO>(this.panierService.ajouterPanier(userId, idPrd),HttpStatus.OK);
 	}
 	
 	
