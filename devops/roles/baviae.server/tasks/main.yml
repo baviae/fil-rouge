@@ -10,22 +10,67 @@
   pip:
     name: docker
 
-- name: pull postgres
+- name: git clone du projet
+  become: no
+  git:
+    repo: https://github.com/baviae/fil-rouge.git
+    dest: /home/dubreu/fil-rouge
+
+- name: DOCKER - Pull image postgres
   docker_image:
     name: postgres
     source: pull
     state: present
 
-- name: install db postgres dans docker
+- name: DOCKER - Lancement container postgres
   community.docker.docker_container:
-    name: postgresDB
+    name: EcoCom-postgres_DB
     image: postgres
+    network_mode: host
     env:
-      POSTGRES_PASSWORD: ""
-      POSTGRES_USER: baba
+      POSTGRES_PASSWORD: "1234"
+      POSTGRES_USER: baviae
       POSTGRES_DB: ecocom
     ports:
-      - "1556:5432"
+      - "5432"
+    state: started
+
+- name: buil jar de l'application
+  become: no
+  shell:
+    cmd: "mvn -f /home/dubreu/fil-rouge/eco-commerce clean install"  
+
+- name: DOCKER - Build image java-application (back-end)
+  community.docker.docker_image:
+    name: java-application
+    build: 
+      path: /home/dubreu/fil-rouge/eco-commerce/
+    source : build
+
+- name: DOCKER - Build image app-front
+  community.docker.docker_image:
+    name: app-front
+    build: 
+      path: /home/dubreu/fil-rouge/eco-commerce-front/
+    source: build
+
+- name: DOCKER - Lancement container back-end
+  community.docker.docker_container:
+    name: EcoCom-Back
+    image: java-application
+    network_mode: host
+    ports:
+      - "8080"
+    detach: yes
+    state: started
+
+- name: DOCKER - Lancement container front-end
+  community.docker.docker_container:
+    name: EcoCom-Front
+    image: app-front
+    network_mode: host
+    ports:
+      - "4200"
     state: started
 
 
