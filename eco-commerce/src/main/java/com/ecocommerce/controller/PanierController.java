@@ -44,13 +44,13 @@ public class PanierController {
 	
 	
 	@DeleteMapping("panier/{panId}/{prdId}")
-	public String supprimerUnProduit(@PathVariable("panId") Long panId,@PathVariable("prdId") Long prdId) {
-		return this.panierService.SupprimerUnProduitDuPanier(panId, prdId);
+	public void supprimerUnProduit(@PathVariable("panId") Long panId,@PathVariable("prdId") Long prdId) {
+		this.panierService.SupprimerUnProduitDuPanier(panId, prdId);
 	}
 	
 	@DeleteMapping("viderpanier/{panId}")
-	public String viderPanier(@PathVariable("panId") Long panId) {
-		return this.panierService.SupprimerPanier(panId);
+	public void viderPanier(@PathVariable("panId") Long panId) {
+		this.panierService.SupprimerPanier(panId);
 	}
 	
 

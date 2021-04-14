@@ -42,10 +42,17 @@ public class PanierService implements IPanierService{
 
 	@Override
 	public PanierDTO getpanierByUserId(Long userId) {
-		Optional<Users> users = this.userDao.findById(userId);
-		System.out.println(users.get());
-		if (users.isPresent()) {
-			return this.panierToPanierDTO(users.get().getPanier());
+		Optional<Users> user = this.userDao.findById(userId);
+		System.out.println(user.get());
+		if (user.isPresent()) {
+			Panier panier = user.get().getPanier();
+			if (panier == null) {
+				panier = new Panier();
+				panier.setProduits(new ArrayList<Produit>());
+				//user.get().setPanier(panier);
+				panierDao.save(panier);
+			}
+			return this.panierToPanierDTO(panier);
 		} else {
 			return null;
 		}
@@ -87,12 +94,17 @@ public class PanierService implements IPanierService{
 	public String SupprimerUnProduitDuPanier(Long panId, Long prdId) {
 		Optional<Panier> opPan = this.panierDao.findById(panId);
 		if (opPan.isPresent()) {
+			Produit produitASupprimer = null;
 			for (Produit prd : opPan.get().getProduits()) {
-				if (prd .getId().equals(prdId)) {
-					opPan.get().getProduits().remove(prd);
+				if (prd.getId().equals(prdId)) {
+					produitASupprimer = prd;
+					break;
 				}
 			}
-			this.panierDao.save(opPan.get());
+			if (produitASupprimer != null) {
+				opPan.get().getProduits().remove(produitASupprimer);
+				this.panierDao.save(opPan.get());
+			}
 			return "ok";
 		} else {
 			return null;
