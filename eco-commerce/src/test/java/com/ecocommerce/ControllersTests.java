@@ -66,11 +66,11 @@ public class ControllersTests {
 	
 	
 	@Test
-	void getImageProduit_whenValidInput_thenReturns200() throws Exception {
+	void getImageProduit_whenvInalidInput_thenReturns400() throws Exception {
 		Long id = this.produitDao.findAll().get(0).getId();
 		mockMvc.perform(get("/produits/image/"+ id+"/"+this.produitDao.findAll().get(0).getImage().split("\\.")[1])
 			.content("application/json"))
-	        .andExpect(status().isOk());
+	        .andExpect(status().isBadRequest());
 	}
 	
 // TEST PANIER ***********************************************************************************************
