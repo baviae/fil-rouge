@@ -1,4 +1,8 @@
 ---
+
+
+
+
 - name: Installation from repo Ubuntu
   apt:
     name: 
@@ -10,11 +14,11 @@
   pip:
     name: docker
 
-- name: git clone du projet
-  become: no
-  git:
-    repo: https://github.com/baviae/fil-rouge.git
-    dest: /home/dubreu/fil-rouge
+#- name: git clone du projet
+#  become: no
+#  git:
+#    repo: https://github.com/baviae/fil-rouge.git
+#    dest: /home/dubreu/fil-rouge
 
 - name: DOCKER - Pull image postgres
   docker_image:
@@ -38,7 +42,28 @@
 - name: buil jar de l'application
   become: no
   shell:
-    cmd: "mvn -f /home/dubreu/fil-rouge/eco-commerce clean install"  
+    cmd: "mvn -f /home/dubreu/fil-rouge/eco-commerce install"
+
+- name: DOCKER - Creation du volume contenant le fichier jar
+  community.docker.docker_volume:
+    volume_name: jarvol
+    state: present
+
+- name: DOCKER - Get infos on volume
+  community.docker.docker_volume_info:
+    name: jarvol
+  register: result    
+
+#- name: DOCKER - 
+#  debug:
+#    var: "{{ 'result.volume['Mountpoint'].stdout' }}"
+#    var: "{{ item.volume }}" 
+#  loop: "{{ result.results }}"
+#  when: result.exists
+
+- name: SHELL - copie du jar dans le volume
+  shell:
+    cmd: "mv /home/dubreu/fil-rouge/eco-commerce/target/*.jar /var/lib/docker/volumes/jarvol/_data" 
 
 - name: DOCKER - Build image java-application (back-end)
   community.docker.docker_image:
@@ -62,6 +87,7 @@
     ports:
       - "8080"
     detach: yes
+    volumes: /home/dubreu/fil-rouge/eco-commerce/target:/app
     state: started
 
 - name: DOCKER - Lancement container front-end
