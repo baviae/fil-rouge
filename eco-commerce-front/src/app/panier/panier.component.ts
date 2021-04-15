@@ -15,22 +15,29 @@ export class PanierComponent implements OnInit {
   appelApi$ = new BehaviorSubject(undefined);
   subscriptions: Subscription[] = [];
   
-  panierUtilisateur$:  Observable<panier>  = this.appelApi$.pipe(
-	        switchMap(() => this.panierService.getPanierUtilisateur(localStorage.getItem('id') as any)));
-  showPanier$: Observable<boolean> = this.panierUtilisateur$.pipe(map(data => data != null && data.produits.length > 0));
-  produits$: Observable<produit[]> = this.panierUtilisateur$.pipe(map(pan => pan.produits));
+  panierUtilisateur$:  Observable<panier>;
+  showPanier$: Observable<boolean>; 
+  produits$: Observable<produit[]>; 
   panierUtilisateur: panier;
   
   constructor(private panierService: PanierService) { }
 
   ngOnInit(): void {
-	//TODO appeler panierService avec l'id de l'utilisateur connecté
+	this.panierUtilisateur$ = this.appelApi$.pipe(
+		switchMap(() => this.panierService.getPanierUtilisateur(localStorage.getItem('id') as any)));
+	this.showPanier$ = this.panierUtilisateur$.pipe(map(data => data != null && data.produits.length > 0));
+	this.produits$ = this.panierUtilisateur$.pipe(map(pan => pan.produits));
+
+
+
+
+	//TODO appeler panierService avec l'id de l'utilisateur connectï¿½
 	/*this.panierService.getPanierUtilisateur(localStorage.getItem('id') as any).subscribe(
 		data => {
 			console.log(data)
 			this.panierUtilisateur = data;
 			 if (this.panierUtilisateur != null && this.panierUtilisateur.produits.length > 0) {
-				this.showPanier = true;
+				this.showPanier$ = true as any;
 			 }
 			}
 	);*/
@@ -38,14 +45,14 @@ export class PanierComponent implements OnInit {
 		data => {
 			console.log(data)
 			this.panierUtilisateur = data;
-			}));
+	}));
 
   }
 
   supprimer(idPrd:number){
 	this.subscriptions.push(this.panierService.supprimerProduit(idPrd,this.panierUtilisateur.id)
 		.subscribe(unused => {
-			console.log("Le produit a été supprimé du panier");
+			console.log("Le produit a ï¿½tï¿½ supprimï¿½ du panier");
 			this.appelApi$.next(undefined);
 		}));
    }
@@ -55,7 +62,7 @@ export class PanierComponent implements OnInit {
 		
 		this.subscriptions.push(this.panierService.viderPanier(this.panierUtilisateur.id)
 		.subscribe(unused => {
-				console.log("Le panier a été vidé");
+				console.log("Le panier a ï¿½tï¿½ vidï¿½");
 				this.appelApi$.next(undefined);
 			}));
 		}

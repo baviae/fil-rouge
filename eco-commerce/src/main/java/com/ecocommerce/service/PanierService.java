@@ -43,13 +43,13 @@ public class PanierService implements IPanierService{
 	@Override
 	public PanierDTO getpanierByUserId(Long userId) {
 		Optional<Users> user = this.userDao.findById(userId);
-		System.out.println(user.get());
+		System.out.println("*********  "+user.get());
 		if (user.isPresent()) {
 			Panier panier = user.get().getPanier();
 			if (panier == null) {
 				panier = new Panier();
-				panier.setProduits(new ArrayList<Produit>());
-				//user.get().setPanier(panier);
+				//panier.setProduits(new ArrayList<Produit>());
+				user.get().setPanier(panier);
 				panierDao.save(panier);
 			}
 			return this.panierToPanierDTO(panier);
