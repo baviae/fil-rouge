@@ -6,8 +6,8 @@
   gather_facts: true
   become: true
   roles:
-  #  - baviae.base
-  #  - geerlingguy.docker
+    - baviae.base
+    - geerlingguy.docker
     - baviae.server
 
 
