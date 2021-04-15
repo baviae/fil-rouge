@@ -1,5 +1,6 @@
 package com.ecocommerce.Entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -30,7 +31,7 @@ public class Panier {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "panier_seq")
 	private Long id;
 	@ManyToMany
-	private List<Produit> produits;
+	private List<Produit> produits = new ArrayList<Produit>();
 	
 
 }

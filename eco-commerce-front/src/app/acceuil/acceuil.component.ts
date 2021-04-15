@@ -55,7 +55,11 @@ export class AcceuilComponent implements OnInit {
     }
 
 	ajoutPan(id:number) {
-		this.panierserv.ajoutdansPanier((localStorage.getItem('id') as any), id).subscribe();
+		this.panierserv.ajoutdansPanier((localStorage.getItem('id') as any), id).subscribe(
+      unused => {
+        alert("Le produit a ete ajouté avec succes au panier");
+      }
+    );
 		console.log((localStorage.getItem('id') as any));
 	}
 }

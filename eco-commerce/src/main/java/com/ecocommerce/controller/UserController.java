@@ -53,7 +53,7 @@ public class UserController {
 		if (authentication != null && authentication.isAuthenticated()) {
 			String token = JwtGetToken.getJWTToken(userDTO.getEmail());
 			userDTO.setId(us.getUser().getId());
-			if (us.getUser().getPanier() != null) {
+			if (us.getUser().getPanier() == null) {
 				userDTO.setPanierDto(this.panierToPanierDTO(us.getUser().getPanier()));
 			}
 			userDTO.setNom(us.getUser().getNom());

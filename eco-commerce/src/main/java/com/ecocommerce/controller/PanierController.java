@@ -31,8 +31,6 @@ public class PanierController {
 	
 	@GetMapping("panier/{userId}")
 	public ResponseEntity<PanierDTO> getPanierUser(@PathVariable("userId") Long userId){
-		//System.out.println(this.panierService.getpanierByUserId(userId));
-		System.out.println("hello3");
 		return new ResponseEntity<PanierDTO>( this.panierService.getpanierByUserId(userId),HttpStatus.OK);
 	}
 	
