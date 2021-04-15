@@ -1,4 +1,20 @@
-<p>Liste des articles dans votre panier</p>
-<ul>
-<li *ngFor="let prd of panierUtilisateur.produits">{{ prd.description }}</li>
-</ul>
+<p class="d-flex justify-content-center mt-5">MON PANIER</p>
+<div *ngIf="showPanier$ | async" class="container d-flex mx-auto row mt-2 pt-5 rounded bg-couleur">
+    <div *ngFor="let prd of (produits$ | async)" class="card mr-5 mb-5" style="width: 18rem;">
+      <div class="row mx-0 justify-content-center alig-item-center"> 
+        <img *ngIf="prd.imagePrd != null" class="card-img-top imageResize my-auto" [src]="prd.imagePrd.imagePatch" alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title">{{prd.nom}}</h5>
+          <p class="card-text">{{prd.description}}</p>
+          <span class="mr-auto">{{prd.prix}} €</span>
+          <p class="card-text"></p>
+          <button class="btn btn-primary d-flex justify-content-center" (click)="supprimer(prd.id)">Supprimer</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  
+<div  *ngIf="showPanier$ | async">
+	<button class="btn btn-danger d-flex justify-content-center" (click)="vider()">Vider le panier</button>
+</div>

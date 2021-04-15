@@ -8,6 +8,8 @@ import { ConnecterService } from '../services/connecter.service';
 import { ListeUserService } from '../services/liste-user.service';
 import { ProduitServiceService } from '../services/produit-service.service';
 import { UsersConnecteServiceService } from '../services/users-connecte-service.service';
+import { PanierService } from '../services/panier.service';
+
 
 @Component({
   selector: 'app-acceuil',
@@ -24,9 +26,10 @@ export class AcceuilComponent implements OnInit {
   user:utilisateur;
   image:Byte[];
   produitsList:produit[];
+  
   constructor(private listeUserService: ListeUserService,
      public connecterService: ConnecterService, private router: Router, public activatedRoute: ActivatedRoute,
-     public usersConnecteServiceService:UsersConnecteServiceService, private produiserv: ProduitServiceService) {
+     public usersConnecteServiceService:UsersConnecteServiceService, private produiserv: ProduitServiceService, public panierserv: PanierService) {
        
      }
 
@@ -50,4 +53,10 @@ export class AcceuilComponent implements OnInit {
         console.log(this.produitsList);
       })
     }
+
+	ajoutPan(id:number) {
+		this.panierserv.ajoutdansPanier((localStorage.getItem('id') as any), id).subscribe();
+		console.log((localStorage.getItem('id') as any));
+	}
 }
+

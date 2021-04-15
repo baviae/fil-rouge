@@ -49,6 +49,7 @@ public class UserController {
 
 		MyUserPrincipal us  = (MyUserPrincipal) authentication.getPrincipal();
 		
+		
 		if (authentication != null && authentication.isAuthenticated()) {
 			String token = JwtGetToken.getJWTToken(userDTO.getEmail());
 			userDTO.setId(us.getUser().getId());

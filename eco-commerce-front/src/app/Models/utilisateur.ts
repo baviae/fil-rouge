@@ -9,6 +9,7 @@ export class utilisateur{
     password:string;
     token: string;
     panier:panier;
+	
 
     constructor(id?:number, nom?:string,prenom?:string,Email?:string,password?:string, token?: string,panier?:panier){
         this.id = id;

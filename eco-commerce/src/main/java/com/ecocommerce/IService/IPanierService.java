@@ -9,13 +9,13 @@ public interface IPanierService {
 	
 	public List<PanierDTO> afficherListePanier();
 	
-	public PanierDTO getpanierBuyId(Long id);
+	public PanierDTO getpanierByUserId(Long id);
 	
 	public String SupprimerUnProduitDuPanier(Long panId, Long prdId);
 	
 	public String SupprimerPanier(Long id);
 	
-	public PanierDTO ajouterPanier(Long id , PanierDTO pan);
+	public PanierDTO ajouterPanier(Long id , Long idPrd);
 	
 	public PanierDTO panierToPanierDTO(Panier pan);
 	
