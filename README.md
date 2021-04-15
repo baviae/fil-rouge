@@ -50,3 +50,7 @@ ssh-keygen -t rsa -b 4096
 ```shell
 mv id_rsa.pub /home/usrname/.ssh/authorized_keys
 ```
+### Commande lancement playbook
+```shell
+ansible-playbook -i inventory.yml  --vault-password-file ~/password_file base.yml
+```
