@@ -6,3 +6,6 @@
     -o-background-size: cover;
     background-size: cover;
 }
+.logout:hover{
+    cursor:pointer;
+}
