@@ -102,5 +102,4 @@
 
 - name: Installation derniere version Ansible via pip 
   pip:
-    name: ansible 
-    
+    name: ansible
