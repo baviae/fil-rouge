@@ -3,11 +3,13 @@
   hosts: server_test
   collections: 
     - community.docker.docker_image
-  gather_facts: true
-  become: true
+  gather_facts: yes
+  become: yes
   roles:
     - baviae.base
     - geerlingguy.docker
-    - baviae.server
+    - baviae.workstation
+
+
 
 

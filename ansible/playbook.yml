@@ -1,8 +1,0 @@
----
-- name: use a dedicated Ansible module
-  hosts: all
-  become: true
-  vars_files:
-    - secret
-  roles:
-    - { role: role.docker }

@@ -1,5 +1,5 @@
 ---
-# defaults file for baviae.base
+# vars file for baviae.base
 users:
   - name: houmadi
     comment: Badrane houmadi

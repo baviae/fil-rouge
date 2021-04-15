@@ -1,0 +1,5 @@
+---
+# tasks file for baviae.workstation
+- name: Installation derniere version Ansible via pip 
+  pip:
+    name: ansible
