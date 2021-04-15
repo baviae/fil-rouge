@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { panier } from '../Models/panier';
 import { PanierService } from '../services/panier.service';
 import { Observable, BehaviorSubject, Subscription } from 'rxjs';
@@ -10,7 +10,7 @@ import { produit } from '../Models/produit';
   templateUrl: './panier.component.html',
   styleUrls: ['./panier.component.css']
 })
-export class PanierComponent implements OnInit {
+export class PanierComponent implements OnInit, OnDestroy {
 
   appelApi$ = new BehaviorSubject(undefined);
   subscriptions: Subscription[] = [];
@@ -61,7 +61,7 @@ export class PanierComponent implements OnInit {
 		}
    }
 
-	ngOndestroy() {
+	ngOnDestroy() {
 		this.subscriptions.forEach( sub => sub.unsubscribe());
 	}
 }
