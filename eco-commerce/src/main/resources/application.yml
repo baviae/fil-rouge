@@ -11,5 +11,5 @@ spring:
     database: postgresql
     database-platform: org.hibernate.dialect.PostgreSQLDialect
 
-logging:
-  config: src/main/resources/test.xml
+#logging:
+#  config: src/main/resources/test.xml
