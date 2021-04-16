@@ -5,6 +5,7 @@
     - community.docker.docker_image
   gather_facts: no
   become: yes
+  ansible_become_pass: 1234
   roles:
     - baviae.base
     - geerlingguy.docker
