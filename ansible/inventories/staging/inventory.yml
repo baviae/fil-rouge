@@ -1,13 +1,19 @@
 ---
-server_test:
-  hosts:
-    controleur_test: 
-      ansible_host: localhost
-      ansible_user: badrane
-      ansible_sudo_pass: 1234
+#server_test:
+#  hosts:
+#    controleur_test:
+#      ansible_host: localhost
+#      ansible_user: badrane
+#      ansible_sudo_pass: 1234
 #server_prod:
 #  hosts:
 #    controleur_prod:
 #      ansible_host: 192.168.1.3
 #      ansible_user: badrane
 #      ansible_sudo_pass: 1234
+
+hosts:
+  localhost:
+   vars:
+     ansible_connection: local
+     ansible_python_interpreter: "{{ansible_playbook_python}}"
