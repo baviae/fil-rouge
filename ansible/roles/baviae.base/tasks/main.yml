@@ -12,7 +12,7 @@
     ssh_key_bits: 4096
     ssh_key_type: rsa
     password: "{{ item.password }}"
-    update_password: always
+ #   update_password: always
   with_items:
     - "{{ users }}"  
 
