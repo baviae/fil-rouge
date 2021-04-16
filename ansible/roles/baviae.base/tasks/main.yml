@@ -45,11 +45,13 @@
   get_url:
     url: https://www.python.org/ftp/python/{{ python_version }}/Python-{{ python_version }}.tgz
     dest: "{{ python_download_destination }}"
-    mode: '0444'
+    owner: "{{ user_sudo }}"
+    mode: '0666'
   when: python_file_details.stat.exists == false
 
 - name: Decompressin de Python-{{ python_version }}.tgz
   unarchive:
+    remote_src: yes
     src: "{{ python_download_destination }}/Python-{{ python_version }}.tgz"
     dest: "{{ python_download_destination }}"
   when: python_file_details.stat.exists == false

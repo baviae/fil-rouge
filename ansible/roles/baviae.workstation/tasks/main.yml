@@ -3,3 +3,11 @@
 - name: Installation derniere version Ansible via pip 
   pip:
     name: ansible
+
+- name: installation collection community_docker
+  shell:
+    cmd: ansible-galaxy collection install community_docker
+
+- name: installation outils
+  package:
+    - whois
