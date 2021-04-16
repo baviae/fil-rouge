@@ -1,20 +1,20 @@
 ---
 
 - name: Ajout utilisateur
-  user:
-    name: "{{ item.name }}"
-    comment: "{{ item.comment }}"
-    create_home: yes
-    expires: -1
-    append: yes
-    groups: sudo
-    generate_ssh_key: yes
-    ssh_key_bits: 4096
-    ssh_key_type: rsa
-    password: "{{ item.password }}"
+ # user:
+ #   name: "{{ item.name }}"
+ #   comment: "{{ item.comment }}"
+#    create_home: yes
+#    expires: -1
+ #   append: yes
+ #   groups: sudo
+ #   generate_ssh_key: yes
+ #   ssh_key_bits: 4096
+ #   ssh_key_type: rsa
+ #   password: "{{ item.password }}"
  #   update_password: always
-  with_items:
-    - "{{ users }}"  
+ # with_items:
+ #   - "{{ users }}"
 
 - name: apt update et apt upgrade
   apt:
