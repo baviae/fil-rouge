@@ -12,8 +12,7 @@
 #      ansible_user: badrane
 #      ansible_sudo_pass: 1234
 
-hosts:
-  localhost:
+hosts: localhost
    vars:
      ansible_connection: local
      ansible_python_interpreter: "{{ansible_playbook_python}}"
