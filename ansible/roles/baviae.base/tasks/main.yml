@@ -1,6 +1,6 @@
 ---
 
-- name: Ajout utilisateur
+#- name: Ajout utilisateur
  # user:
  #   name: "{{ item.name }}"
  #   comment: "{{ item.comment }}"
