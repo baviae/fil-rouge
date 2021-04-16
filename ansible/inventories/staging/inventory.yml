@@ -1,5 +1,5 @@
 ---
-#server_test:
+server_test:
 #  hosts:
 #    controleur_test:
 #      ansible_host: localhost
@@ -12,5 +12,5 @@
 #      ansible_user: badrane
 #      ansible_sudo_pass: 1234
 
-hosts: localhost
+  hosts: localhost
     connection: local
