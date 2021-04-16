@@ -3,7 +3,7 @@
   hosts: localhost
   collections: 
     - community.docker.docker_image
-  gather_facts: no
+  gather_facts: yes
   become: yes
   roles:
     - baviae.base
