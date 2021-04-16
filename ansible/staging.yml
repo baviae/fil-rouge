@@ -1,0 +1,7 @@
+---
+server_test:
+  hosts:
+    controleur_test: 
+      ansible_host: "{{ ip_server }}"
+      ansible_user: "{{ user_install }}"
+      ansible_sudo_pass: "{{ user_install_password }}"

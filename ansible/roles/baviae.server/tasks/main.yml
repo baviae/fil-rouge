@@ -15,6 +15,7 @@
   git:
     repo: https://github.com/baviae/fil-rouge.git
     dest: /home/dubreu/fil-rouge
+    force: yes
 
 - name: DOCKER - Pull image postgres
   docker_image:
@@ -69,6 +70,5 @@
     name: EcoCom-Front
     image: app-front
     network_mode: host
-    ports:
       - "4200"
     state: started
