@@ -3,6 +3,7 @@
   apt:
     name: 
       #- python3-docker
+      - python3-apt
       - maven
     state: present
 
