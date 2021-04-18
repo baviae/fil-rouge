@@ -2,19 +2,19 @@
 - name: Installation from repo Ubuntu
   apt:
     name: 
-      - python3-docker
+      #- python3-docker
       - maven
     state: present
 
-- name: SDK python pour docker
-  pip:
-    name: docker
+#- name: SDK python pour docker
+#  pip:
+#    name: docker
 
-- name: git clone du projet
-  become: no
-  git:
-    repo: https://github.com/baviae/fil-rouge.git
-    dest: /home/dubreu/fil-rouge
+#- name: git clone du projet
+#  become: no
+#  git:
+#    repo: https://github.com/baviae/fil-rouge.git
+#    dest: /home/dubreu/fil-rouge
 
 - name: DOCKER - Pull image postgres
   docker_image:
