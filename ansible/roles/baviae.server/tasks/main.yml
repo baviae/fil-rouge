@@ -38,20 +38,20 @@
 - name: buil jar de l'application
   become: no
   shell:
-    cmd: "mvn -f /home/dubreu/fil-rouge/eco-commerce clean install"
+    cmd: "mvn -f /home/badrane/fil-rouge/eco-commerce clean install"
 
 - name: DOCKER - Build image java-application (back-end)
   community.docker.docker_image:
     name: java-application
     build: 
-      path: /home/dubreu/fil-rouge/eco-commerce/
+      path: /home/badrane/fil-rouge/eco-commerce/
     source : build
 
 - name: DOCKER - Build image app-front
   community.docker.docker_image:
     name: app-front
     build: 
-      path: /home/dubreu/fil-rouge/eco-commerce-front/
+      path: /home/badrane/fil-rouge/eco-commerce-front/
     source: build
 
 - name: DOCKER - Lancement container back-end
