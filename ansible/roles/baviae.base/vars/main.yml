@@ -1,6 +1,7 @@
 ---
 # vars file for baviae.base
 users:
+<<<<<<< HEAD
   - name: badrane
     comment: Badrane houmadi
     password: 1234
@@ -13,6 +14,12 @@ users:
 #  - name: dubreu
 #    comment: Vincent Dubreu
 #    password: $6$lujTb6TFp$5Yasetvp2paG1SXhyyx0cEec0d22DlOnYCpwI.8LPLhvXPQA8hzGsUTGdwcKMmnigjoMPUHndMXuRnwaQHKdK0
+=======
+  - name: deploy
+    comment: Utilisateur Deploiement
+    password: $6$LyqDQ/iY0$yRgksXlqPJIDdqBssb7nttzD1bOau1RVzSLrl0FDloqQtB735WV/hLKMnQ5l3sMWq/ZjvRN7gDS2YdjjBeeQL0
+    groups: sudo
+>>>>>>> d137c1f76588f072a4e135c735d84ccef2614d55
 
 python_version: '3.9.4' 
-python_download_destination: /usr/local/src  
+python_download_destination: /usr/local/src

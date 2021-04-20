@@ -14,7 +14,8 @@
   become: no
   git:
     repo: https://github.com/baviae/fil-rouge.git
-    dest: /home/dubreu/fil-rouge
+    dest: /home/{{ user_sudo }}/fil-rouge
+    force: yes
 
 - name: DOCKER - Pull image postgres
   docker_image:
@@ -39,19 +40,22 @@
   become: no
   shell:
     cmd: "mvn -f /home/badrane/fil-rouge/eco-commerce clean install"
+    #cmd: "mvn -f /home/{{ user_sudo }}/fil-rouge/eco-commerce clean install"
 
 - name: DOCKER - Build image java-application (back-end)
   community.docker.docker_image:
     name: java-application
-    build: 
+    build:
       path: /home/badrane/fil-rouge/eco-commerce/
+      #path: /home/{{ user_sudo }}/fil-rouge/eco-commerce/
     source : build
 
 - name: DOCKER - Build image app-front
   community.docker.docker_image:
     name: app-front
-    build: 
+    build:
       path: /home/badrane/fil-rouge/eco-commerce-front/
+      #path: /home/{{ user_sudo }}/fil-rouge/eco-commerce-front/
     source: build
 
 - name: DOCKER - Lancement container back-end
