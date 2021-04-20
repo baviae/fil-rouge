@@ -40,14 +40,14 @@
 - name: buil jar de l'application
   become: no
   shell:
-    cmd: "mvn -f /home/badrane/fil-rouge/eco-commerce clean install"
+    cmd: "mvn -f /home/ubuntu/fil-rouge/eco-commerce clean install"
     #cmd: "mvn -f /home/{{ user_sudo }}/fil-rouge/eco-commerce clean install"
 
 - name: DOCKER - Build image java-application (back-end)
   community.docker.docker_image:
     name: java-application
     build:
-      path: /home/badrane/fil-rouge/eco-commerce/
+      path: /home/ubuntu/fil-rouge/eco-commerce/
       #path: /home/{{ user_sudo }}/fil-rouge/eco-commerce/
     source : build
 
@@ -55,7 +55,7 @@
   community.docker.docker_image:
     name: app-front
     build:
-      path: /home/badrane/fil-rouge/eco-commerce-front/
+      path: /home/ubuntu/fil-rouge/eco-commerce-front/
       #path: /home/{{ user_sudo }}/fil-rouge/eco-commerce-front/
     source: build
 
