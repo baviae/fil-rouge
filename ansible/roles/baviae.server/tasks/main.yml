@@ -6,9 +6,9 @@
       - maven
     state: latest
 
-#- name: SDK python pour docker
-#  pip:
-#    name: docker
+- name: SDK python pour docker
+  pip:
+    name: docker
 
 #- name: git clone du projet
 #  become: no
