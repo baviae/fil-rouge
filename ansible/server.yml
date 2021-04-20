@@ -1,12 +1,12 @@
 ---
 - name: Deploiement serveur
-  hosts: localhost
+  hosts: server_test
   collections: 
     - community.docker.docker_image
   gather_facts: yes
   become: yes
   roles:
-  #  - baviae.base
+    - baviae.base
     - geerlingguy.docker
     - baviae.server
 
