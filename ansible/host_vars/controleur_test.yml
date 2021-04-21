@@ -1,5 +1,6 @@
 user_ssh: deploy
-ip_server: 192.168.0.48
+user_sudo: deploy
+ip_server: 192.168.0.19
 user_sudo_pass: !vault |
          $ANSIBLE_VAULT;1.1;AES256
          62353639336263353335663835636132343766386462376666343866396262306138366231616330
