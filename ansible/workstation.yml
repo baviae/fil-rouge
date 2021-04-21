@@ -3,7 +3,6 @@
   hosts: localhost
   vars:
     user_ssh: ubuntu
-    ip_server: 192.168.1.80
     user_sudo: ubuntu
   collections: 
     - community.docker.docker_image
