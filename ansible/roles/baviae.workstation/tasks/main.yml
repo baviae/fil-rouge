@@ -8,6 +8,6 @@
   shell:
     cmd: ansible-galaxy collection install community_docker
 
-- name: installation outils
-  package:
-    - whois
+#- name: installation outils
+#  package:
+#    - whois
