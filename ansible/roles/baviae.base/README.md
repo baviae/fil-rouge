@@ -54,7 +54,7 @@ ssh-keygen -t rsa -b 4096 # tout mettre par defaut
 ssh-copy-id user@ip-adress # permet de copier simplement la clé vers la remote
 # lancement du playbook local
 cd fil-rouge/ansible
-ansible-playbook workstation.yml --ask-vault-pass -e 'ansible_python_interpreter=/usr/bin/python3' -K #  nous demande le mdp du vault 
+ansible-playbook workstation.yml -e 'ansible_python_interpreter=/usr/bin/python3' -K #  nous demande le mdp du vault 
 
 # lancement du playbook remote
 sudo apt-get install python3-venv -y
