@@ -54,7 +54,7 @@ ssh-keygen -t rsa -b 4096 # tout mettre par defaut
 ssh-copy-id user@ip-adress # permet de copier simplement la clé vers la remote
 # lancement du playbook local
 cd fil-rouge/ansible
-ansible-playbook -i host_vars/controleur_test.yml workstation.yml --ask-vault-password #  nous demande le mdp du vault 
+ansible-playbook -i host_vars/controleur_test.yml workstation.yml --ask-vault-pass #  nous demande le mdp du vault 
 
 # lancement du playbook remote
 python3 -m venv venv
