@@ -29,11 +29,18 @@
     image: postgres
     network_mode: host
     env:
-      POSTGRES_PASSWORD: "1234"
+      POSTGRES_PASSWORD: !vault |
+          $ANSIBLE_VAULT;1.1;AES256
+          33343633326462653761343835323334346133643463393333653065373235643461336233373666
+          3131316130656232333661366238373961383230636363650a313863666430383439393164633736
+          37383664356634633235343862666530633638626166393266323163663535313035643535316662
+          3762383135303038620a613535613763666366636332313963643935623265306661393163353637
+          3133
       POSTGRES_USER: baviae
       POSTGRES_DB: ecocom
     ports:
       - "5432"
+    container_default_behavior: no_defaults
     state: started
 
 - name: buil jar de l'application
@@ -60,9 +67,10 @@
     name: EcoCom-Back
     image: java-application
     network_mode: host
+    #    volume: /home/{{ user_sudo }}/fil-rouge/eco-commerce/:/app
     ports:
       - "8080"
-    detach: yes
+    container_default_behavior: no_defaults
     state: started
 
 - name: DOCKER - Lancement container front-end
@@ -72,4 +80,5 @@
     network_mode: host
     ports:
       - "4200"
+    container_default_behavior: no_defaults
     state: started

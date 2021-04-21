@@ -12,14 +12,15 @@
     ssh_key_bits: 4096
     ssh_key_type: rsa
     password: "{{ item.password }}"
-    update_password: always
+    update_password: on_create
+    state: present
   with_items:
     - "{{ users }}"  
 
-- name: apt update et apt upgrade
-  apt:
-    update_cache: yes
-    upgrade: 'yes'
+      #- name: apt update et apt upgrade
+      #apt:
+      #update_cache: 'yes'
+      #upgrade: 'yes'
 
 - name: Preparation compilation Python
   package:

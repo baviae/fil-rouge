@@ -1,0 +1,26 @@
+version: "3"
+services:
+  db:
+    image: postgres
+    #volumes:
+    #  - db_data:/
+    ports: 
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: baviae
+      POSTGRES_PASSWORD: "1234"
+      POSTGRES_DB: ecocom
+
+  backend:
+    build: ../../eco-commerce
+    volumes:
+      - /home/deploy/fil-rouge/eco-commerce:/app
+    ports:
+      - "8080:8080"
+
+  #frontend:
+   # image: node:12.2.0
+   # ports:
+   #   - "4200:4200"
+
+

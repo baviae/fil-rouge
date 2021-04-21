@@ -12,3 +12,5 @@ server_test:
           3666316430346261640a663964353766306563626436636236343961663864306231613165666265
           3066
       become_user: "{{ user_sudo }}"
+      ansible_python_interpreter: "/usr/bin/python3"
+
