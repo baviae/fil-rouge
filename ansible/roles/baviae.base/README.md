@@ -60,7 +60,7 @@ ansible-playbook workstation.yml -K # le -K nous demande le mdp sudo
 python3 -m venv venv
 source venv/bin/activate
 pip3 install ansible
-ansible-playbook -i staging.yml server.yml -e 'ansible_python_interpreter=/usr/bin/python3'
+ansible-playbook -i staging.yml server.yml -e 'ansible_python_interpreter=/usr/bin/python3' --ask-vault-password
 
 
 
