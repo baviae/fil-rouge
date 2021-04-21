@@ -45,9 +45,9 @@ An optional section for the role authors to include contact information, or a we
 
 ## Local
 sudo apt update
-sudo apt upgrade
-sudo apt install python3
-sudo apt install ansible #on installe ansible pour permettre le lancemant du playbook la premier fois
+sudo apt upgrade -y
+sudo apt install python3 -y
+sudo apt install ansible -y #on installe ansible pour permettre le lancemant du playbook la premier fois
 git clone "cloner le projet" #avant de cloner changer les ip, user et le vault dans : host_vars/controlleur_test.yml
 # bien propager votre cle ssh pour la connection en remote
 ssh-keygen -t rsa -b 4096 # tout mettre par defaut
