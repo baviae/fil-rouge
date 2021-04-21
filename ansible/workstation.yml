@@ -14,7 +14,7 @@
       3961
   collections: 
     - community.docker.docker_image
-  gather_facts: yes
+  gather_facts: no
   become: yes
   roles:
     - baviae.base
