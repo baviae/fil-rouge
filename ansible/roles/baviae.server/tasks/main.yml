@@ -1,7 +1,7 @@
 ---
 - name: Installation from repo Ubuntu
   apt:
-    name: 
+    name:
       - python3-docker
       - maven
     state: present
@@ -51,14 +51,14 @@
 - name: DOCKER - Build image java-application (back-end)
   community.docker.docker_image:
     name: java-application
-    build: 
+    build:
       path: /home/{{ user_sudo }}/fil-rouge/eco-commerce/
     source : build
 
 - name: DOCKER - Build image app-front
   community.docker.docker_image:
     name: app-front
-    build: 
+    build:
       path: /home/{{ user_sudo }}/fil-rouge/eco-commerce-front/
     source: build
 
