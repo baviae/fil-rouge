@@ -1,6 +1,7 @@
 ---
 - name: Deploiement serveur
-  hosts: all
+  hosts: localhost
+    controleur_test:
   collections: 
     - community.docker.docker_image
   gather_facts: yes
