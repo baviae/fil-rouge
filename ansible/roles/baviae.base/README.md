@@ -36,3 +36,31 @@ Author Information
 ------------------
 
 An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+
+##****************************************************************************
+##****************************************************************************
+##****************************************************************************
+
+## Lancement des playbook 
+
+## Local
+sudo apt update
+sudo apt upgrade
+sudo apt install python3
+sudo apt install ansible #on installe ansible pour permettre le lancemant du playbook la premier fois
+git clone "cloner le projet" #avant de cloner changer les ip, user et le vault dans : host_vars/controlleur_test.yml
+# bien propager votre cle ssh pour la connection en remote
+ssh-keygen -t rsa -b 4096 # tout mettre par defaut
+ssh-copy-id user@ip-adress # permet de copier simplement la clé vers la remote
+# lancement du playbook local
+cd fil-rouge/ansible
+ansible-playbook workstation.yml -K # le -K nous demande le mdp sudo
+
+# lancement du playbook remote
+python3 -m venv venv
+source venv/bin/activate
+pip3 install ansible
+ansible-playbook -i staging.yml server.yml -e 'ansible_python_interpreter=/usr/bin/python3'
+
+
+
