@@ -15,10 +15,6 @@
     name:
       - nodejs
 
-- name: Installation Angular cli
-  ansible.builtin.shell:
-    cmd: npm install -g @angular/cli
-
 - name: SDK python pour docker
   pip:
     name: docker
