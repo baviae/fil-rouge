@@ -83,6 +83,10 @@
   ansible.builtin.shell:
     cmd: npm run build --prefix /home/{{ user_sudo }}/fil-rouge/eco-commerce-front/
 
+- name: Creation des cle et certification ssl pour nginx
+  ansible.builtin.shell:
+    cmd:  openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private/nginx.key -out /etc/ssl/certs/nginx.crt
+
 - name: Build nginx image
   community.docker.docker_image:
     name: app-front-nginx
