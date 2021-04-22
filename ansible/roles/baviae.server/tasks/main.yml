@@ -98,7 +98,7 @@
 
 - name: Build angular app
   ansible.builtin.shell:
-    cmd: ng build /home/{{ user_sudo }}/fil-rouge/eco-commerce-front/
+    cmd: npm run build --prefix /home/{{ user_sudo }}/fil-rouge/eco-commerce-front/
 
 - name: Build nginx image
   community.docker.docker_image:
