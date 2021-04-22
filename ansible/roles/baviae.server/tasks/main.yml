@@ -64,13 +64,6 @@
       path: /home/{{ user_sudo }}/fil-rouge/eco-commerce/
     source : build
 
-#- name: DOCKER - Build image app-front
-#  community.docker.docker_image:
-#    name: app-front
-#    build:
-#      path: /home/{{ user_sudo }}/fil-rouge/eco-commerce-front/
-#    source: build
-
 - name: DOCKER - Lancement container back-end
   community.docker.docker_container:
     name: EcoCom-Back
@@ -81,16 +74,6 @@
       - "8080"
     container_default_behavior: no_defaults
     state: started
-
-#- name: DOCKER - Lancement container front-end
-#  community.docker.docker_container:
-#    name: EcoCom-Front
-#    image: app-front
-#    network_mode: host
-#    ports:
-#      - "4200"
-#    container_default_behavior: no_defaults
-#    state: started
 
 - name: install angular app
   ansible.builtin.shell:
