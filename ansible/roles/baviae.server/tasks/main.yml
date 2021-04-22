@@ -4,7 +4,21 @@
     name:
       - python3-docker
       - maven
+      - python-software-properties
     state: present
+
+- name: registre node
+  ansible.builtin.shell:
+    cmd: curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
+
+- name: Installation nodejs
+  apt:
+    name:
+      - nodejs
+
+- name: Installation Angular cli
+  ansible.builtin.shell:
+    cmd: npm install -g @angular/cli
 
 - name: SDK python pour docker
   pip:
@@ -80,5 +94,26 @@
     network_mode: host
     ports:
       - "4200"
+    container_default_behavior: no_defaults
+    state: started
+
+- name: Build angular app
+  ansible.builtin.shell:
+    cmd: ng build /home/{{ user_sudo }}/fil-rouge/eco-commerce-front/
+
+- name: Build nginx image
+  community.docker.docker_image:
+    name: app-front-nginx
+    build:
+      path: /home/{{ user_sudo }}/fil-rouge/nginx/
+    source: build
+
+- name: DOCKER - Lancement container front-end
+  community.docker.docker_container:
+    name: EcoCom-Front-nginx
+    image: app-front-nginx
+    network_mode: host
+    ports:
+      - "80"
     container_default_behavior: no_defaults
     state: started
