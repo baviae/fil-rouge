@@ -85,7 +85,7 @@
 
 - name: Creation des cle et certification ssl pour nginx
   ansible.builtin.shell:
-    cmd:  openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private/nginx.key -out /etc/ssl/certs/nginx.crt -batch
+    cmd:  openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /home/{{ user_sudo }}/fil-rouge/eco-commerce-front/nginx.key -out /home/{{ user_sudo }}/fil-rouge/eco-commerce-front/nginx.crt -batch
 
 - name: Build nginx image
   community.docker.docker_image:
