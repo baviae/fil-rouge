@@ -4,7 +4,6 @@
     name:
       - python3-docker
       - maven
-      - python-software-properties
     state: present
 
 - name: registre node
