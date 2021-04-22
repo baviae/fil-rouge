@@ -96,6 +96,10 @@
     container_default_behavior: no_defaults
     state: started
 
+- name: install angular app
+  ansible.builtin.shell:
+    cmd: npm install --prefix /home/{{ user_sudo }}/fil-rouge/eco-commerce-front/
+
 - name: Build angular app
   ansible.builtin.shell:
     cmd: npm run build --prefix /home/{{ user_sudo }}/fil-rouge/eco-commerce-front/
