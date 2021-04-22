@@ -108,7 +108,7 @@
       path: /home/{{ user_sudo }}/fil-rouge/nginx/
     source: build
 
-- name: DOCKER - Lancement container front-end
+- name: DOCKER Lancement container front-end nginx
   community.docker.docker_container:
     name: EcoCom-Front-nginx
     image: app-front-nginx
