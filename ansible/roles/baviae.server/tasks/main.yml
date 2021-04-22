@@ -94,6 +94,7 @@
       path: /home/{{ user_sudo }}/fil-rouge/eco-commerce-front/
     source: build
 
+
 - name: DOCKER Lancement container front-end nginx
   community.docker.docker_container:
     name: app-front-nginx-1
