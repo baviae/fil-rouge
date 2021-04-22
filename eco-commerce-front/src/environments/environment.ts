@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  baseurl: 'http://'+window.location.hostname+':8080'
+  baseurl: 'https://'+window.location.hostname+':8080'
 };
 
 /*
