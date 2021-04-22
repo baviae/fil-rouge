@@ -1,18 +1,6 @@
-# base image
-FROM node:12.2.0
-# set working directory
-WORKDIR /app
-
-# add `/app/node_modules/.bin` to $PATH
-ENV PATH /app/node_modules/.bin:$PATH
-
-# install and cache app dependencies
-COPY package.json /app/package.json
-RUN npm install
-RUN npm install -g @angular/cli@latest
-
-# add app
-COPY . /app
-
-# start app
-CMD ng serve --host 0.0.0.0
+FROM nginx
+RUN rm /etc/nginx/nginx.conf /etc/nginx/conf.d/default.conf
+COPY baviae.conf /etc/nginx/conf.d/
+COPY dist/eco-commerce-front /server/eco-commerce-front
+VOLUME /etc/nginx
+VOLUME /server/eco-commerce-front
