@@ -109,7 +109,7 @@
 
 - name: DOCKER Lancement container front-end nginx
   community.docker.docker_container:
-    name: EcoCom-Front-nginx
+    name: app-front-nginx-1
     image: app-front-nginx
     network_mode: host
     ports:
