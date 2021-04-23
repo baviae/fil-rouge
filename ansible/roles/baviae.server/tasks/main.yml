@@ -85,17 +85,34 @@
 
 - name: Creation des cle et certification ssl pour nginx
   ansible.builtin.shell:
-    cmd:  openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /home/{{ user_sudo }}/fil-rouge/eco-commerce-front/nginx.key -out /home/{{ user_sudo }}/fil-rouge/eco-commerce-front/nginx.crt -batch
+    cmd:  openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /home/{{ user_sudo }}/fil-rouge/nginx/nginx.key -out /home/{{ user_sudo }}/fil-rouge/nginx/nginx.crt -batch
 
-- name: Build nginx image
+- name: Build de l'application front
   community.docker.docker_image:
-    name: app-front-nginx
+    name: app-front-node
     build:
       path: /home/{{ user_sudo }}/fil-rouge/eco-commerce-front/
     source: build
 
 
-- name: DOCKER Lancement container front-end nginx
+- name: Build nginx image
+  community.docker.docker_image:
+    name: app-front-nginx
+    build:
+      path: /home/{{ user_sudo }}/fil-rouge/nginx/
+    source: build
+
+- name: DOCKER - Lancement container front-end node
+  community.docker.docker_container:
+    name: app-front-node1
+    image: app-front-node
+    network_mode: host
+    ports:
+      - "4200"
+    container_default_behavior: no_defaults
+    state: started
+
+- name: DOCKER - Lancement container front-end nginx
   community.docker.docker_container:
     name: app-front-nginx-1
     image: app-front-nginx
