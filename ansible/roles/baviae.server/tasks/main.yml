@@ -81,7 +81,7 @@
 
 - name: Build angular app
   ansible.builtin.shell:
-    cmd: npm run build --prefix /home/{{ user_sudo }}/fil-rouge/eco-commerce-front/
+    cmd: npm run build --prod --prefix /home/{{ user_sudo }}/fil-rouge/eco-commerce-front/
 
 - name: Creation des cle et certification ssl pour nginx
   ansible.builtin.shell:
