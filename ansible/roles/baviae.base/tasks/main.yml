@@ -19,7 +19,7 @@
 - name: apt update et apt upgrade
   apt:
     update_cache: yes
-    upgrade: 'yes'
+    upgrade: yes
 
 - name: Preparation compilation Python
   package:
