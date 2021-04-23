@@ -3,6 +3,9 @@
   hosts: all
   gather_facts: yes
   become: yes
+  collections:
+  - name: community.docker
+
   roles:
     #- baviae.base
     #- geerlingguy.docker
