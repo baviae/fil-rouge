@@ -3,3 +3,7 @@
   become: yes
   gather_facts: yes
 
+tasks:
+  - name: test
+    command: ls /
+
