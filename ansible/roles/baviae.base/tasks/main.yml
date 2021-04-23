@@ -45,7 +45,7 @@
   get_url:
     url: https://www.python.org/ftp/python/{{ python_version }}/Python-{{ python_version }}.tgz
     dest: "{{ python_download_destination }}"
-    owner: "{{ user_sudo }}"
+    #owner: "{{ user_sudo }}"
     mode: '0666'
   when: python_file_details.stat.exists == false
 
