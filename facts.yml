@@ -10,4 +10,4 @@
     
     - name: print
       debug:
-        msg: "{{ resu }}" 
+        msg: "{{ resu.stdout }}" 

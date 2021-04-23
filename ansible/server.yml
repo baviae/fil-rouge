@@ -1,8 +1,8 @@
 ---
-- name: Deploiement serveur
-  hosts: server_test
-  collections: 
-    - community.docker.docker_image
+- name: Deploiement docker sur serveur
+  hosts: all
+  #collections: 
+  #  - community.docker.docker_image
   gather_facts: yes
   become: yes
   roles:
