@@ -5,8 +5,8 @@
   become: yes
   roles:
     - baviae.base
-    #- geerlingguy.docker
-    #- baviae.server
+    - geerlingguy.docker
+    - baviae.server
 
 
 
