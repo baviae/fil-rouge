@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.eco-commerce</groupId>
 	<artifactId>eco-commerce</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.1</version>
 	<packaging>jar</packaging>
 	<name>eco-commerce</name>
 	<description>Application d&apos;éco-commerce</description>
