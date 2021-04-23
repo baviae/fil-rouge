@@ -1,7 +1,6 @@
 ---
 - name: Deploiement serveur
-  hosts: server_test
-  collections: 
+  hosts: all
     - community.docker.docker_image
   gather_facts: yes
   become: yes
