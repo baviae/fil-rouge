@@ -14,6 +14,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.ecocommerce.DTO.PanierDTO;
 import com.ecocommerce.DTO.ProduitDTO;
@@ -26,6 +27,7 @@ import com.ecocommerce.utile.MyUserPrincipal;
 
 
 @RestController
+@RequestMapping("api/")
 public class UserController {
 	
 	@Autowired
@@ -35,12 +37,12 @@ public class UserController {
 	private AuthenticationManager authenticationManager;
 		
 	
-	@PostMapping("/SignIn")
+	@PostMapping("SignIn")
 	public UserDTO inscription(@RequestBody UserDTO userDTO) {
 		return this.userService.saveUser(userDTO);
 	}
 	
-	@PostMapping("/login")
+	@PostMapping("login")
 	public ResponseEntity<UserDTO> login(@RequestBody UserDTO userDTO) {
 		
 		UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(
@@ -69,14 +71,14 @@ public class UserController {
 	
 
 	
-	@GetMapping("/deconnexion")
+	@GetMapping("deconnexion")
 	public void controleurDeconnection(HttpServletRequest request,HttpServletResponse res) throws IOException {
 		request.getSession().invalidate();
 		res.sendRedirect("/login");
 	}
 
 
-	@GetMapping("/utilisateurs")
+	@GetMapping("utilisateurs")
 	public List<UserDTO> listeUser(){
 		return this.userService.listeUsers();
 	}
