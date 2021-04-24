@@ -71,7 +71,7 @@ public class PanierService implements IPanierService{
 	@Override
 	public PanierDTO ajouterPanier(Long idUser, Long idPrd) {
 		Optional<Users> user = this.userDao.findById(idUser);
-		if (user.isEmpty()) return null;
+		if (!user.isPresent()) return null;
 		Panier panierUtilisateur = user.get().getPanier();
 		if(panierUtilisateur == null) {
 			panierUtilisateur = new Panier();
@@ -80,7 +80,7 @@ public class PanierService implements IPanierService{
 			panierUtilisateur.setProduits(new ArrayList<Produit>());
 		}
 		Optional<Produit> produit = produitDao.findById(idPrd);
-		if(produit.isEmpty()) return null;
+		if(!produit.isPresent()) return null;
 		panierUtilisateur.getProduits().add(produit.get());
 		panierDao.save(panierUtilisateur);
 		return panierToPanierDTO(panierUtilisateur);

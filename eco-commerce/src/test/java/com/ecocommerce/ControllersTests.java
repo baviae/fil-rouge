@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.context.WebApplicationContext;
 
@@ -50,7 +51,7 @@ public class ControllersTests {
 	@Test
 	void ajoutProduit_whenValidInput_thenReturns200() throws Exception {
 		ProduitDTO prd = ProduitDTO.builder().nom("prd1").image("image.jpeg").description("description").prix(5.0).build();
-	    mockMvc.perform(post("/produit")
+	    mockMvc.perform(post("/api/produit")
 	        .contentType("application/json")
 	        .content(objectMapper.writeValueAsString(prd)))
 	        .andExpect(status().isOk());
@@ -59,7 +60,7 @@ public class ControllersTests {
 	
 	@Test
 	void produisList_whenValidInput_thenReturns200() throws Exception {
-	   mockMvc.perform(get("/produits")
+	   mockMvc.perform(get("/api/produits")
 			.content("application/json"))
 	        .andExpect(status().isOk());
 	}
@@ -68,7 +69,7 @@ public class ControllersTests {
 	@Test
 	void getImageProduit_whenvInalidInput_thenReturns400() throws Exception {
 		Long id = this.produitDao.findAll().get(0).getId();
-		mockMvc.perform(get("/produits/image/"+ id+"/"+this.produitDao.findAll().get(0).getImage().split("\\.")[1])
+		mockMvc.perform(get("/api/produits/image/"+ id+"/"+this.produitDao.findAll().get(0).getImage().split("\\.")[1])
 			.content("application/json"))
 	        .andExpect(status().isBadRequest());
 	}
