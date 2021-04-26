@@ -52,17 +52,6 @@
     container_default_behavior: no_defaults
     state: started
 
-- name: buil jar de l'application
-  become: no
-  shell:
-    cmd: "mvn -f /home/{{ ansible_user }}/fil-rouge/eco-commerce clean install"
-
-- name: DOCKER - Build image java-application (back-end)
-  community.docker.docker_image:
-    name: java-application
-    build: 
-      path: /home/{{ ansible_user }}/fil-rouge/eco-commerce/
-    source : build
 
 - name: DOCKER - Build image app-front
   community.docker.docker_image:
@@ -74,12 +63,7 @@
 - name: DOCKER - Lancement container back-end
   community.docker.docker_container:
     name: EcoCom-Back
-    image: java-application
-    network_mode: host
-    #    volume: /home/{{ ansible_user }}/fil-rouge/eco-commerce/:/app
-    ports:
-      - "8080"
-    container_default_behavior: no_defaults
+    image: aeckelineravalomanda/baviae
     state: started
 
 - name: install angular app
