@@ -1,13 +1,13 @@
 ---
-- name: Deploiement docker sur serveur
+- name: Deploiement serveur
   hosts: all
-  #collections: 
-  #  - community.docker.docker_image
   gather_facts: yes
   become: yes
   roles:
     - baviae.base
     - geerlingguy.docker
     - baviae.server
+
+
 
 

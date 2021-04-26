@@ -1,0 +1,13 @@
+---
+- hosts: all
+  become: yes
+  gather_facts: yes
+
+  tasks:
+    - name: test
+      command: ls /
+      register: resu
+    
+    - name: print
+      debug:
+        msg: "{{ resu.stdout }}" 
