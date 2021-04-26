@@ -76,7 +76,7 @@
     name: EcoCom-Back
     image: java-application
     network_mode: host
-    #    volume: /home/{{ user_sudo }}/fil-rouge/eco-commerce/:/app
+    #    volume: /home/{{ ansible_user }}/fil-rouge/eco-commerce/:/app
     ports:
       - "8080"
     container_default_behavior: no_defaults
@@ -84,21 +84,21 @@
 
 - name: install angular app
   ansible.builtin.shell:
-    cmd: npm install --prefix /home/{{ user_sudo }}/fil-rouge/eco-commerce-front/
+    cmd: npm install --prefix /home/{{ ansible_user }}/fil-rouge/eco-commerce-front/
 
 - name: Build angular app
   ansible.builtin.shell:
-    cmd: npm run build --prod --prefix /home/{{ user_sudo }}/fil-rouge/eco-commerce-front/
+    cmd: npm run build --prod --prefix /home/{{ ansible_user }}/fil-rouge/eco-commerce-front/
 
 - name: Creation des cle et certification ssl pour nginx
   ansible.builtin.shell:
-    cmd:  openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /home/{{ user_sudo }}/fil-rouge/nginx/nginx.key -out /home/{{ user_sudo }}/fil-rouge/nginx/nginx.crt -batch
+    cmd:  openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /home/{{ ansible_user }}/fil-rouge/nginx/nginx.key -out /home/{{ ansible_user }}/fil-rouge/nginx/nginx.crt -batch
 
 - name: Build de l'application front
   community.docker.docker_image:
     name: app-front-node
     build:
-      path: /home/{{ user_sudo }}/fil-rouge/eco-commerce-front/
+      path: /home/{{ ansible_user }}/fil-rouge/eco-commerce-front/
     source: build
 
 
@@ -106,7 +106,7 @@
   community.docker.docker_image:
     name: app-front-nginx
     build:
-      path: /home/{{ user_sudo }}/fil-rouge/nginx/
+      path: /home/{{ ansible_user }}/fil-rouge/nginx/
     source: build
 
 - name: DOCKER - Lancement container front-end node
