@@ -35,19 +35,6 @@
     ports:
       - "5432"
     state: started
-
-- name: buil jar de l'application
-  become: no
-  shell:
-    cmd: "mvn -f /home/{{ ansible_user }}/fil-rouge/eco-commerce clean install"
-
-- name: DOCKER - Build image java-application (back-end)
-  community.docker.docker_image:
-    name: java-application
-    build: 
-      path: /home/{{ ansible_user }}/fil-rouge/eco-commerce/
-    source : build
-
 - name: DOCKER - Build image app-front
   community.docker.docker_image:
     name: app-front
@@ -58,7 +45,7 @@
 - name: DOCKER - Lancement container back-end
   community.docker.docker_container:
     name: EcoCom-Back
-    image: java-application
+    image: aeckelineravalomanda/baviae
     network_mode: host
     ports:
       - "8080"
