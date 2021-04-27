@@ -64,6 +64,7 @@
   community.docker.docker_container:
     name: EcoCom-Back
     image: aeckelineravalomanda/baviae
+    network_mode: host
     state: started
 
 - name: install angular app
