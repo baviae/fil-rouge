@@ -1,7 +1,7 @@
 spring:
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/ecocom
+    url: jdbc:postgresql://170.75.162.111:5432/ecocom
     username: baviae
     password: 1234
 
