@@ -35,6 +35,7 @@
     ports:
       - "5432"
     state: started
+
 - name: DOCKER - Build image app-front
   community.docker.docker_image:
     name: app-front
@@ -60,3 +61,12 @@
     ports:
       - "4200"
     state: started
+
+- name: download Filebeat
+  shell: curl -L -o /home/{{ ansible_user }}/filebeat.deb -O https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-7.12.0-amd64.deb
+
+- name: Installation Filebeat
+  shell: sudo dpkg -i /home/{{ ansible_user }}/filebeat.deb
+
+    
+  
