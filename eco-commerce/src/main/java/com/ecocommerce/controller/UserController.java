@@ -5,6 +5,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -31,6 +34,8 @@ import com.ecocommerce.utile.MyUserPrincipal;
 @RequestMapping("api/")
 public class UserController {
 	
+	private static Logger logger = LoggerFactory.getLogger(UserController.class);
+	
 	@Autowired
 	UserService userService;
 
@@ -40,6 +45,7 @@ public class UserController {
 	
 	@PostMapping("SignIn")
 	public UserDTO inscription(@RequestBody UserDTO userDTO) {
+		logger.info("Creation du compte : "+ userDTO.getEmail());
 		return this.userService.saveUser(userDTO);
 	}
 	
@@ -63,6 +69,7 @@ public class UserController {
 			userDTO.setPrenom(us.getUser().getPrenom());
 			userDTO.setToken(token);
 			userDTO.setPassword(null);
+			logger.info("Connexion du compte : "+ userDTO.getEmail());
 			return new ResponseEntity<UserDTO>(userDTO,HttpStatus.OK);
 		}
 

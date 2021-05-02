@@ -34,7 +34,9 @@ public class StoreLogs {
 	}
 	
 	// Lancer tous les 70 sec
-    @Scheduled(cron = "*/70 * * * * *" )
+    //@Scheduled(cron = "*/70 * * * * *")
+	// Lancer tous les jours a 6h
+    @Scheduled(cron = "0 0 6 * * *")
 	public void storeParMin() {
 		// Blob
 		File sourceFile = null, downloadedFile = null;

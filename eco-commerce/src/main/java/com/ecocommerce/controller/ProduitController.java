@@ -39,18 +39,20 @@ public class ProduitController {
 	
 	@GetMapping("produits")
 	public List<ProduitDTO> produisList(){
-		logger.warn("get all produit");
+		logger.info("get all produit");
 		return this.produitService.afficherListeProduit();
 	}
 	
 	@PostMapping("produit")
 	public ProduitDTO ajoutProduit(@RequestBody ProduitDTO dto) {
+		logger.info("save a produit");
 		return this.produitService.ajouterProduit(dto);
 	}
 	
 	@GetMapping(value = "produits/image/{idPrd}/{type}", produces = MediaType.IMAGE_JPEG_VALUE)
 	public ResponseEntity<byte[]> getImageProduit(@PathVariable("idPrd") String idPrd,@PathVariable("type") String type) throws IOException {
-		Path filez = Paths.get("src/main/resources/static/image/" + idPrd + "."+ type.split("\\.")[1]);
+		Path filez = Paths.get("image/" + idPrd + "."+ type.split("\\.")[1]);
+		logger.info("get image produit");
 	    return ResponseEntity.ok().contentType(MediaType.IMAGE_PNG).body(Files.readAllBytes(filez));
 	}
 	
@@ -64,8 +66,8 @@ public class ProduitController {
 		}
 		
 		this.produitService.updateprd(prdDto);
-		System.out.println(file.getOriginalFilename());
-		File filez = new File("src/main/resources/static/image/"+produitId+"."+prdDto.getImage().split("\\.")[1]);
+		logger.info("Save image produit");
+		File filez = new File("image/"+produitId+"."+prdDto.getImage().split("\\.")[1]);
 	      try (FileOutputStream fosFor = new FileOutputStream(filez)) {
 	      fosFor.write(file.getBytes());
 	    }
