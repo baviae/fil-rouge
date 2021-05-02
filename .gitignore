@@ -163,6 +163,8 @@ eco-commerce/src/main/resources/static/
 
 eco-commerce/bin/
 
+image/
+
 
 # IDEs and editors
 .project

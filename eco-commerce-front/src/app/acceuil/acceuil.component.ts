@@ -50,9 +50,17 @@ export class AcceuilComponent implements OnInit {
           );
           }
         });
-        console.log(this.produitsList);
       })
     }
+
+  check(){
+    if (localStorage.getItem('token') != undefined && localStorage.getItem('token') != null && localStorage.getItem('token') != "null"
+    && localStorage.getItem('token') != "undefined"){
+      return true;
+    } else {
+      return false;
+    }
+  }
 
 	ajoutPan(id:number) {
 		this.panierserv.ajoutdansPanier((localStorage.getItem('id') as any), id).subscribe(
@@ -60,7 +68,6 @@ export class AcceuilComponent implements OnInit {
         alert("Le produit a ete ajouté avec succes au panier");
       }
     );
-		console.log((localStorage.getItem('id') as any));
 	}
 }
 
