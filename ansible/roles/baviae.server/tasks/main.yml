@@ -70,6 +70,9 @@
       POSTGRES_DB: ecocom
     ports:
       - "5432"
+    volumes: 
+      - "/var/log/postgres_ecocom/:/var/log/postgresql/"
+      - "/var/lib/postgres_ecocom_db/:/var/lib/postgresql/data"
     container_default_behavior: no_defaults
     state: started
 
@@ -86,6 +89,8 @@
     name: EcoCom-Back
     image: aeckelineravalomanda/baviae
     network_mode: host
+    volumes: 
+      - "/var/log/appli_ecocom:/app"
     state: started
 
 - name: install angular app
