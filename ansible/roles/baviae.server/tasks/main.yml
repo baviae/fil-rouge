@@ -28,27 +28,27 @@
 
 - name: Arret des container
   community.docker.docker_container:
-    force_kill: yes
     name:
       - EcoCom-Back
       - app-front-node1
       - app-front-nginx-1
+    state: stopped
 
-- name: Arret des container
+- name: Suppression des container
   community.docker.docker_container:
-    state: absent
     name:
       - EcoCom-Back
       - app-front-node1
       - app-front-nginx-1
+    state: absent
 
 - name: Suppression des images
   community.docker.docker_image:
-    state: force_absent
     name:
       - app-front
       - app-front-node
       - app-front-nginx
+    state: force_absent
 
 - name: DOCKER - Pull image postgres
   docker_image:
