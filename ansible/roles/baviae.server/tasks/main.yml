@@ -27,16 +27,22 @@
     force: yes
 
 - name: Arret des container
-  ansible.builtin.shell:
-    cmd: docker stop `docker ps -a`
-
-- name: Suppression des container
-  ansible.builtin.shell:
-    cmd: docker rm `docker ps -a`
+  community.docker.docker_container:
+    state: absent
+    name:
+      - EcoCom-postgres_DB
+      - EcoCom-Back
+      - app-front-node1
+      - app-front-nginx-1
 
 - name: Suppression des images
-  ansible.builtin.shell:
-    cmd: docker rmi `docker imge ls -q`
+  community.docker.docker_image:
+    state: absent
+    name:
+      - postgres
+      - app-front
+      - app-front-node
+      - app-front-nginx
 
 - name: DOCKER - Pull image postgres
   docker_image:
