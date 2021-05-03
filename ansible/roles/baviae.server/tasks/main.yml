@@ -50,7 +50,7 @@
 
 - name: Remove all images
   docker_image:
-    name: "{{ item }}"
+    name: '{{ item.Names[0] | regex_replace("^/", "") }}'
     state: absent
   loop: "{{ image_info.images | map(attribute='Id') | list }}"
 
