@@ -37,6 +37,7 @@
     state: stopped
   loop: '{{ docker_info.containers }}'
 
+
 - name: Suppression des container
   docker_container:
     name: '{{ item.Names[0] | regex_replace("^/", "") }}'
