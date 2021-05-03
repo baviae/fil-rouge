@@ -60,8 +60,10 @@ public class PanierService implements IPanierService{
 	public String SupprimerPanier(Long id) {
 		Optional<Panier> opPan = this.panierDao.findById(id);
 		if (opPan.isPresent()) {
-			opPan.get().getProduits().forEach(prd -> this.produitDao.deleteById(prd.getId()));
+			ArrayList<Long> prds = new ArrayList<Long>();
+			opPan.get().getProduits().forEach(prd -> prds.add(prd.getId()));
 			opPan.get().getProduits().clear();
+			prds.forEach(prd -> this.produitDao.deleteById(prd));
 			this.panierDao.save(opPan.get());
 			return "ok";
 		}else {
