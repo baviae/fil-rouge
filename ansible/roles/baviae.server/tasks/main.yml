@@ -43,13 +43,16 @@
     state: absent
   loop: '{{ docker_info.containers }}'
 
-- name: Suppression des images
-  community.docker.docker_image:
-    name:
-      - app-front
-      - app-front-node
-      - app-front-nginx
-    state: force_absent
+- name: Get details of all images
+  docker_host_info:
+    images: yes
+  register: image_info
+
+- name: Remove all images
+  docker_image:
+    name: "{{ item }}"
+    state: absent
+  loop: "{{ image_info.images | map(attribute='Id') | list }}"
 
 - name: DOCKER - Pull image postgres
   docker_image:
