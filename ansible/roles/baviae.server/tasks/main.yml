@@ -44,8 +44,16 @@
   loop: '{{ docker_info.containers }}'
 
 - name: Remove all images
-  community.docker.docker_prune:
-    images: yes
+  community.docker.docker_image:
+    force: yes
+    state: absent
+    name:
+      - "postgres"
+      - "app-front"
+      - "app-front-node"
+      - "app-front-nginx"
+      - "aeckelineravalomanda/baviae"
+
 
 - name: DOCKER - Pull image postgres
   docker_image:
@@ -90,7 +98,7 @@
     image: aeckelineravalomanda/baviae
     network_mode: host
     volumes:
-      - "/var/log/appli_ecocom:/app"
+      - "/var/log/appli_ecocom:/app/log"
     state: started
 
 - name: install angular app
