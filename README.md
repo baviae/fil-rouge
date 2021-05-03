@@ -54,5 +54,9 @@ mv id_rsa.pub /home/usrname/.ssh/authorized_keys
 ansible-playbook -i staging.yml  --vault-password-file ~/password_file server.yml
 ```
 # Mise en place de jenkins-pic
-```shell
+Fork et clone du repo https://github.com/crunchy-devops/jenkins-pic
+
+# Mise en place de AWX
+Fork et clone du repo https://github.com/ansible/awx.git
+
 
