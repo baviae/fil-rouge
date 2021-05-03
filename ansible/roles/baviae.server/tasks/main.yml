@@ -52,7 +52,7 @@
   docker_image:
     name: '{{ item.Names[0] | regex_replace("^/", "") }}'
     state: absent
-  loop: "{{ image_info.images | map(attribute='Id') | list }}"
+  loop: '{{ image_info.images }}'
 
 - name: DOCKER - Pull image postgres
   docker_image:
