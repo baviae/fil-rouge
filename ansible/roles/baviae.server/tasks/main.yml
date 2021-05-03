@@ -89,6 +89,8 @@
     name: EcoCom-Back
     image: aeckelineravalomanda/baviae
     network_mode: host
+    volumes:
+    - "/var/log/appli_ecocom:/var/log/app"
     state: started
 
 - name: install angular app
