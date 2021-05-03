@@ -26,6 +26,18 @@
     dest: /home/{{ ansible_user }}/fil-rouge
     force: yes
 
+- name: Arret des container
+  ansible.builtin.shell:
+    cmd: docker stop `docker ps -a`
+
+- name: Suppression des container
+  ansible.builtin.shell:
+    cmd: docker rm `docker ps -a`
+
+- name: Suppression des images
+  ansible.builtin.shell:
+    cmd: docker rmi `docker imge ls -q`
+
 - name: DOCKER - Pull image postgres
   docker_image:
     name: postgres
