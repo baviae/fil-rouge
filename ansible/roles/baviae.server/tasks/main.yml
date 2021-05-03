@@ -26,6 +26,11 @@
     dest: /home/{{ ansible_user }}/fil-rouge
     force: yes
 
+- name: Get a list of all running containers
+  docker_host_info:
+    containers: True
+  register: docker_info
+
 - name: Arret des container
   docker_container:
     name: '{{ item.Names[0] | regex_replace("^/", "") }}'
