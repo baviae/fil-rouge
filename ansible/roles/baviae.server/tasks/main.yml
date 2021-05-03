@@ -27,20 +27,16 @@
     force: yes
 
 - name: Arret des container
-  community.docker.docker_container:
-    name:
-      - EcoCom-Back
-      - app-front-node1
-      - app-front-nginx-1
+  docker_container:
+    name: '{{ item.Names[0] | regex_replace("^/", "") }}'
     state: stopped
+  loop: '{{ docker_info.containers }}'
 
 - name: Suppression des container
-  community.docker.docker_container:
-    name:
-      - EcoCom-Back
-      - app-front-node1
-      - app-front-nginx-1
+  docker_container:
+    name: '{{ item.Names[0] | regex_replace("^/", "") }}'
     state: absent
+  loop: '{{ docker_info.containers }}'
 
 - name: Suppression des images
   community.docker.docker_image:
