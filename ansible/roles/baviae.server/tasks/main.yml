@@ -43,16 +43,9 @@
     state: absent
   loop: '{{ docker_info.containers }}'
 
-- name: Get details of all images
-  docker_host_info:
-    images: yes
-  register: image_info
-
 - name: Remove all images
-  docker_image:
-    name: '{{ item.Names[0] | regex_replace("^/", "") }}'
-    state: absent
-  loop: '{{ image_info.images }}'
+  community.docker.docker_prune:
+    images: yes
 
 - name: DOCKER - Pull image postgres
   docker_image:
