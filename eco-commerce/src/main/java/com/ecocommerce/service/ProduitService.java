@@ -1,5 +1,6 @@
 package com.ecocommerce.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -81,8 +82,6 @@ public class ProduitService implements IProduitService{
 				.prix(prd.getPrix())
 				.description(prd.getDescription()).build();
 	}
-
-
 
 
 }
