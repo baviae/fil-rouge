@@ -43,17 +43,30 @@
     state: absent
   loop: '{{ docker_info.containers }}'
 
-- name: Remove all images
-  community.docker.docker_image:
-    force: yes
+- name: Remove image postgres
+  docker_image:
     state: absent
-    name:
-      - "postgres"
-      - "app-front"
-      - "app-front-node"
-      - "app-front-nginx"
-      - "aeckelineravalomanda/baviae"
+    name: postgres
 
+- name: Remove image app-front
+  docker_image:
+    state: absent
+    name: app-front
+
+- name: Remove image app-front-node
+  docker_image:
+    state: absent
+    name: app-front-node
+
+- name: Remove image app-front-nginx
+  docker_image:
+    state: absent
+    name: app-front-nginx
+
+- name: Remove image back
+  docker_image:
+    state: absent
+    name: aeckelineravalomanda/baviae
 
 - name: DOCKER - Pull image postgres
   docker_image:
