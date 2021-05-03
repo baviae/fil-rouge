@@ -28,7 +28,7 @@
 
 - name: Arret des container
   community.docker.docker_container:
-    state: force_kill
+    force_kill: yes
     name:
       - EcoCom-Back
       - app-front-node1
