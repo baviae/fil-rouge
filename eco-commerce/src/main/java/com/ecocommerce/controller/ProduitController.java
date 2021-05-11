@@ -52,7 +52,7 @@ public class ProduitController {
 		return this.produitService.ajouterProduit(dto);
 	}
 	
-	@GetMapping(value = "produits/image/{idPrd}/{type}", produces = MediaType.IMAGE_JPEG_VALUE)
+	@GetMapping(value = "image/{idPrd}/{type}", produces = MediaType.IMAGE_JPEG_VALUE)
 	public ResponseEntity<byte[]> getImageProduit(@PathVariable("idPrd") String idPrd,@PathVariable("type") String type) throws IOException {
 		Path filez = Paths.get("app/image/" + idPrd + "."+ type.split("\\.")[1]);
 		logger.info("get image produit");
@@ -70,7 +70,12 @@ public class ProduitController {
 		
 		this.produitService.updateprd(prdDto);
 		logger.info("Save image produit");
-		File filez = new File("app/image/"+produitId+"."+prdDto.getImage().split("\\.")[1]);
+	    String directoryName = "/remote/";
+	    File directory = new File(directoryName);
+	    if (! directory.exists()){
+	        directory.mkdir();
+	    }
+		File filez = new File("image/"+produitId+"."+prdDto.getImage().split("\\.")[1]);
 	      try (FileOutputStream fosFor = new FileOutputStream(filez)) {
 	      fosFor.write(file.getBytes());
 	    }
