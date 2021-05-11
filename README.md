@@ -26,7 +26,7 @@ L'applicatioon "éco-commerce" est une plateforme de vente en ligne des articles
 
 - Installer NPM (node package manager) version 14.6 LTS.
 - Installer Angular-cli grace a npm avec la commande : npm install -g angular-cli
-- si angular a des problemes de lancement faire : 
+- Si angular a des problemes de lancement faire : 
 Remove one / from /// on line number 7 in file node_modules/@types/node/index.d.ts
 
   
