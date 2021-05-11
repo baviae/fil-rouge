@@ -70,11 +70,7 @@ public class ProduitController {
 		
 		this.produitService.updateprd(prdDto);
 		logger.info("Save image produit");
-	    String directoryName = "/remote/";
-	    File directory = new File(directoryName);
-	    if (! directory.exists()){
-	        directory.mkdir();
-	    }
+	    Files.createDirectories(Paths.get("/image"));
 		File filez = new File("image/"+produitId+"."+prdDto.getImage().split("\\.")[1]);
 	      try (FileOutputStream fosFor = new FileOutputStream(filez)) {
 	      fosFor.write(file.getBytes());
